@@ -1,6 +1,8 @@
 package com.brailsoft.base;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 /**
@@ -16,10 +18,14 @@ import java.util.logging.Level;
  */
 public class BrailsoftApplication {
 	private static final String USER_HOME = "user.home";
-	private static final String LOG_DIRECTORY_SUFFIX = ".logs";
+	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
-	private static final String AUDIT_DIRECTORY_SUFFIX = ".audits";
+	private static final String AUDIT_DIRECTORY_NAME = "audits";
 	private static final String AUDIT_FILE_SUFFIX = ".audit";
+	private static final String ARCHIVE_DIRECTORY_NAME = "archives";
+	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
+	private static final DateTimeFormatter formatter = DateTimeFormatter
+			.ofPattern(BrailsoftDateFormats.dateFormatForArchiveFileName);
 	private String applicationName;
 
 	/**
@@ -51,7 +57,7 @@ public class BrailsoftApplication {
 	}
 
 	public final String loggerFile() {
-		return new File(loggerDirectoryFile(), applicationName + LOG_FILE_SUFFIX).getAbsolutePath();
+		return loggerFileFile().getAbsolutePath();
 	}
 
 	public final String auditDirectory() {
@@ -59,7 +65,15 @@ public class BrailsoftApplication {
 	}
 
 	public final String auditFile() {
-		return new File(auditDirectoryFile(), applicationName + AUDIT_FILE_SUFFIX).getAbsolutePath();
+		return auditFileFile().getAbsolutePath();
+	}
+
+	public final String archiveDirectory() {
+		return archiveDirectoryFile().getAbsolutePath();
+	}
+
+	public final String archiveFile() {
+		return archiveFileFile().getAbsolutePath();
 	}
 
 	/**
@@ -82,16 +96,40 @@ public class BrailsoftApplication {
 		return "1.0.0";
 	}
 
-	private final File loggerDirectoryFile() {
+	private final File applicationWorkingDirectoryFile() {
 		File rootDirectory = new File(System.getProperty(USER_HOME));
-		File logDirectory = new File(rootDirectory, applicationName + LOG_DIRECTORY_SUFFIX);
+		File applicationDirectory = new File(rootDirectory, applicationName);
+		return applicationDirectory;
+	}
+
+	private final File loggerDirectoryFile() {
+		File logDirectory = new File(applicationWorkingDirectoryFile(), LOG_DIRECTORY_NAME);
 		return logDirectory;
 	}
 
+	private final File loggerFileFile() {
+		File logFile = new File(loggerDirectoryFile(), applicationName + LOG_FILE_SUFFIX);
+		return logFile;
+	}
+
 	private final File auditDirectoryFile() {
-		File rootDirectory = new File(System.getProperty(USER_HOME));
-		File auditDirectory = new File(rootDirectory, applicationName + AUDIT_DIRECTORY_SUFFIX);
+		File auditDirectory = new File(applicationWorkingDirectoryFile(), AUDIT_DIRECTORY_NAME);
 		return auditDirectory;
 	}
 
+	private final File auditFileFile() {
+		File auditFile = new File(auditDirectoryFile(), applicationName + AUDIT_FILE_SUFFIX);
+		return auditFile;
+	}
+
+	private final File archiveDirectoryFile() {
+		File archiveDirectory = new File(applicationWorkingDirectoryFile(), ARCHIVE_DIRECTORY_NAME);
+		return archiveDirectory;
+	}
+
+	private final File archiveFileFile() {
+		String archiveFileName = applicationName + ARCHIVE_FILE_SUFFIX + formatter.format(LocalDateTime.now());
+		File archiveFile = new File(archiveDirectoryFile(), archiveFileName);
+		return archiveFile;
+	}
 }
