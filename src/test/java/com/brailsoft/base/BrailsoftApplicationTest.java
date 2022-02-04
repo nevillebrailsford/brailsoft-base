@@ -2,6 +2,7 @@ package com.brailsoft.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.logging.Level;
@@ -37,34 +38,61 @@ class BrailsoftApplicationTest {
 	void testLoggerDirectory() {
 		BrailsoftApplication test = new BrailsoftApplication("test");
 		File f = new File(System.getProperty("user.home"));
-		File f2 = new File(f, "test.logs");
-		assertEquals(f2.getAbsolutePath(), test.loggerDirectory());
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "logs");
+		assertEquals(f3.getAbsolutePath(), test.loggerDirectory());
 	}
 
 	@Test
 	void testLoggerFile() {
 		BrailsoftApplication test = new BrailsoftApplication("test");
 		File f = new File(System.getProperty("user.home"));
-		File f2 = new File(f, "test.logs");
-		File f3 = new File(f2, "test.trace");
-		assertEquals(f3.getAbsolutePath(), test.loggerFile());
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "logs");
+		File f4 = new File(f3, "test.trace");
+		assertEquals(f4.getAbsolutePath(), test.loggerFile());
 	}
 
 	@Test
 	void testAuditDirectory() {
 		BrailsoftApplication test = new BrailsoftApplication("test");
 		File f = new File(System.getProperty("user.home"));
-		File f2 = new File(f, "test.audits");
-		assertEquals(f2.getAbsolutePath(), test.auditDirectory());
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "audits");
+		assertEquals(f3.getAbsolutePath(), test.auditDirectory());
 	}
 
 	@Test
 	void testAuditFile() {
 		BrailsoftApplication test = new BrailsoftApplication("test");
 		File f = new File(System.getProperty("user.home"));
-		File f2 = new File(f, "test.audits");
-		File f3 = new File(f2, "test.audit");
-		assertEquals(f3.getAbsolutePath(), test.auditFile());
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "audits");
+		File f4 = new File(f3, "test.audit");
+		assertEquals(f4.getAbsolutePath(), test.auditFile());
+	}
+
+	@Test
+	void testArchiveDirectory() {
+		BrailsoftApplication test = new BrailsoftApplication("test");
+		File f = new File(System.getProperty("user.home"));
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "archives");
+		assertEquals(f3.getAbsolutePath(), test.archiveDirectory());
+	}
+
+	@Test
+	void testArchiveFile() {
+		BrailsoftApplication test = new BrailsoftApplication("test");
+		File f = new File(System.getProperty("user.home"));
+		File f2 = new File(f, "test");
+		File f3 = new File(f2, "archives");
+		File f4 = new File(f3, "test.archive-");
+		String prefix = f4.getAbsolutePath();
+		String archiveFileName = test.archiveFile();
+		assertTrue(archiveFileName.startsWith(f4.getAbsolutePath()));
+		String pattern = "[0-9]{4}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}";
+		assertTrue(archiveFileName.substring(prefix.length()).matches(pattern));
 	}
 
 	@Test
