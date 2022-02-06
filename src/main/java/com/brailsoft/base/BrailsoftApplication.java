@@ -26,6 +26,7 @@ public class BrailsoftApplication {
 	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
 	private static final DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern(BrailsoftDateFormats.dateFormatForArchiveFileName);
+	private static int executorServiceThreads = 5;
 	private String applicationName;
 
 	/**
@@ -94,6 +95,26 @@ public class BrailsoftApplication {
 	 */
 	public String version() {
 		return "1.0.0";
+	}
+
+	/**
+	 * This is the number of ExecutorService threads required in the thread pool.
+	 * This defaults to 5.
+	 * 
+	 * @return number of threads.
+	 */
+	public int executorServiceThreads() {
+		return executorServiceThreads;
+	}
+
+	/**
+	 * Change the number of threads that the executor service will use. Once the
+	 * executor service has been created, this call will have no effect, however.
+	 * 
+	 * @param number
+	 */
+	public void setExecutorServiceThreads(int number) {
+		executorServiceThreads = number;
 	}
 
 	private final File applicationWorkingDirectoryFile() {
