@@ -12,7 +12,7 @@ public class BrailsoftLogFormatter extends Formatter {
 
 	private final static DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern(BrailsoftDateFormats.dateFormatForLogRecord);
-	private final static String lineEnd = "\n";
+	private final static char lineEnd = 10;
 	private final static String ENTRY = ">";
 	private final static String EXIT = "<";
 	private final static String EXCEPTION = "x";
@@ -132,7 +132,7 @@ public class BrailsoftLogFormatter extends Formatter {
 
 	private String processParameters(LogRecord record) {
 		StringBuilder builder = new StringBuilder();
-		String newLine = "";
+		char newLine = ' ';
 		if (record.getParameters() != null) {
 			for (Object obj : record.getParameters()) {
 				if (obj == null) {
