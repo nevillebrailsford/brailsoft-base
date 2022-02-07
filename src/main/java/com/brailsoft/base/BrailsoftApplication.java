@@ -11,7 +11,7 @@ import java.util.logging.Level;
  * Information such as the nodename for configuration details, log file
  * directory and so forth can be obtained from this class.
  * <p>
- * All public methods are final excepti Level() and version().
+ * All public methods are final except Level() and version().
  * 
  * @author nevil
  *
