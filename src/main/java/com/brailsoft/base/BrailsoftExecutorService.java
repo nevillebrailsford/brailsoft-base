@@ -12,12 +12,12 @@ import java.util.concurrent.Executors;
 public class BrailsoftExecutorService {
 	private static BrailsoftExecutorService instance = null;
 
-	private ExecutorService executor = Executors.newFixedThreadPool(5);
+	private ExecutorService executor;
 
 	/**
 	 * Create the single instance, passing in application. Application is used on
-	 * only the first call to getInstance(). Once created, the instance has been
-	 * created, the parameter may be omitted.
+	 * only the first call to getInstance(). Once the instance has been created, the
+	 * parameter may be omitted.
 	 * 
 	 * @param application
 	 * @return instance
