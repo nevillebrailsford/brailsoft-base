@@ -8,10 +8,10 @@ import java.util.logging.Formatter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
-public class BrailsoftLogFormatter extends Formatter {
+public class LogFormatter extends Formatter {
 
 	private final static DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(BrailsoftDateFormats.dateFormatForLogRecord);
+			.ofPattern(DateFormats.dateFormatForLogRecord);
 	private final static char lineEnd = 10;
 	private final static String ENTRY = ">";
 	private final static String EXIT = "<";
@@ -24,9 +24,9 @@ public class BrailsoftLogFormatter extends Formatter {
 	private final static String FINER = "r";
 	private final static String FINEST = "t";
 
-	private BrailsoftApplication application;
+	private Application application;
 
-	public BrailsoftLogFormatter(BrailsoftApplication application) {
+	public LogFormatter(Application application) {
 		assert (application != null);
 		this.application = application;
 	}

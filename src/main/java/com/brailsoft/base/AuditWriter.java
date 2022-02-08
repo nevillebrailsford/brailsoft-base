@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 
-public class BrailsoftAuditWriter {
-	private BrailsoftApplication application;
+public class AuditWriter {
+	private Application application;
 
-	public BrailsoftAuditWriter(BrailsoftApplication application) {
+	public AuditWriter(Application application) {
 		assert (application != null);
 		this.application = application;
 	}
 
-	public void write(BrailsoftAuditRecord<? extends BrailsoftAuditType, ? extends BrailsoftAuditObject> record) {
+	public void write(AuditRecord<? extends AuditType, ? extends AuditObject> record) {
 		assert (record != null);
 		File auditDirectory = new File(application.auditDirectory());
 		if (!auditDirectory.exists()) {

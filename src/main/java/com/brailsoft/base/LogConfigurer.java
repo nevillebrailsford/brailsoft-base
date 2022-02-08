@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Configure the java logging infrastructure and ensure there is only a file
  * handler registered. Information specific to an application is passed into the
- * class by a BrailsoftApplication instance. The onlt changes that can be made
+ * class by a Application instance. The onlt changes that can be made
  * to the logging facility is to change the level of trace recording. It is
  * important that shutdown is called to ensure that all logging infotmation is
  * written out and files are closed.
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author nevil
  *
  */
-public class BrailsoftLogConfigurer {
+public class LogConfigurer {
 	private static Logger LOGGER = null;
 	private static FileHandler fileHandler;
 	private static boolean setup = false;
@@ -33,7 +33,7 @@ public class BrailsoftLogConfigurer {
 	 * @throws AssetionError if application is null,or the logging directory could
 	 *                       not be created, or setup has already been called.
 	 */
-	public synchronized static void setUp(BrailsoftApplication application) {
+	public synchronized static void setUp(Application application) {
 		assert (!setup);
 		assert (application != null);
 		LOGGER = Logger.getLogger(application.loggerName());
@@ -54,7 +54,7 @@ public class BrailsoftLogConfigurer {
 		String logfileName = new File(application.loggerFile()).getAbsolutePath();
 		try {
 			fileHandler = new FileHandler(logfileName, 1000000000l, 1, false);
-			fileHandler.setFormatter(new BrailsoftLogFormatter(application));
+			fileHandler.setFormatter(new LogFormatter(application));
 			LOGGER.addHandler(fileHandler);
 		} catch (SecurityException e) {
 			e.printStackTrace();

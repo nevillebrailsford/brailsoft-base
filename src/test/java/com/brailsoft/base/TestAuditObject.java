@@ -1,6 +1,6 @@
 package com.brailsoft.base;
 
-public enum TestAuditObject implements BrailsoftAuditObject {
+public enum TestAuditObject implements AuditObject {
 	File("File");
 
 	private String object;

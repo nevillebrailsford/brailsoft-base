@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BrailsoftLogConfigurerTest {
+class LogConfigurerTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -26,7 +26,7 @@ class BrailsoftLogConfigurerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -38,7 +38,7 @@ class BrailsoftLogConfigurerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -50,32 +50,32 @@ class BrailsoftLogConfigurerTest {
 
 	@Test
 	void testsetup() {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());
-		BrailsoftLogConfigurer.setUp(app);
+		LogConfigurer.setUp(app);
 		assertTrue(f.exists());
-		BrailsoftLogConfigurer.shutdown();
+		LogConfigurer.shutdown();
 	}
 
 	@Test
 	void testNullArgumentSetup() {
 		assertThrows(AssertionError.class, () -> {
-			BrailsoftLogConfigurer.setUp(null);
+			LogConfigurer.setUp(null);
 		});
 	}
 
 	@Test
 	void testSetLevelNoSetup() {
 		assertThrows(AssertionError.class, () -> {
-			BrailsoftLogConfigurer.changeLevel(Level.ALL);
+			LogConfigurer.changeLevel(Level.ALL);
 		});
 	}
 
 	@Test
 	void testShutdownlNoSetup() {
 		assertThrows(AssertionError.class, () -> {
-			BrailsoftLogConfigurer.shutdown();
+			LogConfigurer.shutdown();
 		});
 	}
 

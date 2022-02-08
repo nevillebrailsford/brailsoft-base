@@ -1,5 +1,5 @@
 package com.brailsoft.base;
 
-public interface BrailsoftAuditObject {
+public interface AuditObject {
 	public abstract String object();
 }

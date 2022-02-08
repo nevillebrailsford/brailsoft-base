@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BrailsoftAuditWriterTest {
+class AuditWriterTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -24,7 +24,7 @@ class BrailsoftAuditWriterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -36,7 +36,7 @@ class BrailsoftAuditWriterTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -48,20 +48,20 @@ class BrailsoftAuditWriterTest {
 
 	@Test
 	void testWriterCreation() {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
-		new BrailsoftAuditWriter(app);
+		new AuditWriter(app);
 		assertFalse(f.exists());
 	}
 
 	@Test
 	void testWriterWriter() {
-		BrailsoftApplication app = new BrailsoftApplication("test");
+		Application app = new Application("test");
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
-		BrailsoftAuditWriter writer = new BrailsoftAuditWriter(app);
-		BrailsoftAuditRecord<?, ?> record = new BrailsoftAuditRecord<>(TestAuditType.Opened, TestAuditObject.File,
+		AuditWriter writer = new AuditWriter(app);
+		AuditRecord<?, ?> record = new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File,
 				"message");
 		writer.write(record);
 		assertTrue(f.exists());

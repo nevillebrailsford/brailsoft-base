@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 /**
- * BrailsoftApplication contains information specific to an application using
+ * Application contains information specific to an application using
  * brailsoft.base as a base for logging, configuration and auditing functions.
  * Information such as the nodename for configuration details, log file
  * directory and so forth can be obtained from this class.
@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * @author nevil
  *
  */
-public class BrailsoftApplication {
+public class Application {
 	private static final String USER_HOME = "user.home";
 	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
@@ -25,7 +25,7 @@ public class BrailsoftApplication {
 	private static final String ARCHIVE_DIRECTORY_NAME = "archives";
 	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
 	private static final DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(BrailsoftDateFormats.dateFormatForArchiveFileName);
+			.ofPattern(DateFormats.dateFormatForArchiveFileName);
 	private static int executorServiceThreads = 5;
 	private String applicationName;
 
@@ -35,7 +35,7 @@ public class BrailsoftApplication {
 	 * @param applicationName
 	 * @throws AssertionError if applicationName is null or empty
 	 */
-	public BrailsoftApplication(String applicationName) {
+	public Application(String applicationName) {
 		assert (applicationName != null);
 		assert (!applicationName.isEmpty());
 		this.applicationName = applicationName;
