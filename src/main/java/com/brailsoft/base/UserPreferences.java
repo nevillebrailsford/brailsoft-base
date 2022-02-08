@@ -4,27 +4,27 @@ import java.util.Optional;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-public class BrailsoftPreferences {
-	private static BrailsoftPreferences instance = null;
+public class UserPreferences {
+	private static UserPreferences instance = null;
 
 	private Preferences applicationPreferences = null;
 
-	public synchronized static BrailsoftPreferences getInstance(String... nodeName) {
+	public synchronized static UserPreferences getInstance(String... nodeName) {
 		if (instance == null) {
 			if (nodeName.length == 0) {
-				throw new IllegalArgumentException("BrailsoftPreferences: nodeName was null");
+				throw new IllegalArgumentException("UserPreferences: nodeName was null");
 			} else if (nodeName.length > 1) {
-				throw new IllegalArgumentException("BrailsoftPreferences: more than 1 nodeName was specified");
+				throw new IllegalArgumentException("UserPreferences: more than 1 nodeName was specified");
 			}
 			if (nodeName[0] == null || nodeName[0].isBlank() || nodeName[0].isEmpty()) {
-				throw new IllegalArgumentException("BrailsoftPreferences: nodeName was null");
+				throw new IllegalArgumentException("UserPreferences: nodeName was null");
 			}
-			instance = new BrailsoftPreferences(nodeName[0]);
+			instance = new UserPreferences(nodeName[0]);
 		}
 		return instance;
 	}
 
-	private BrailsoftPreferences(String nodeName) {
+	private UserPreferences(String nodeName) {
 		applicationPreferences = Preferences.userRoot().node(nodeName);
 	}
 

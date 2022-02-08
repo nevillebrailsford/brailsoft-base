@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BrailsoftAuditRecordTest {
+class AuditRecordTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -29,43 +29,43 @@ class BrailsoftAuditRecordTest {
 
 	@Test
 	void test() {
-		BrailsoftAuditRecord<TestAuditType, TestAuditObject> record;
-		record = new BrailsoftAuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "message");
+		AuditRecord<TestAuditType, TestAuditObject> record;
+		record = new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "message");
 		assertTrue(record != null);
 	}
 
 	@Test
 	void testNullType() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftAuditRecord<>(null, TestAuditObject.File, "message");
+			new AuditRecord<>(null, TestAuditObject.File, "message");
 		});
 	}
 
 	@Test
 	void testNullObject() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftAuditRecord<>(TestAuditType.Opened, null, "message");
+			new AuditRecord<>(TestAuditType.Opened, null, "message");
 		});
 	}
 
 	@Test
 	void testNullMessage() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftAuditRecord<>(TestAuditType.Opened, TestAuditObject.File, null);
+			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, null);
 		});
 	}
 
 	@Test
 	void testEmptyMessage() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftAuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "");
+			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "");
 		});
 	}
 
 	@Test
 	void testBlankMessage() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftAuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "       ");
+			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "       ");
 		});
 	}
 

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BrailsoftLogFormatterTest {
+class LogFormatterTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -26,8 +26,8 @@ class BrailsoftLogFormatterTest {
 
 	@Test
 	void test() {
-		BrailsoftApplication application = new BrailsoftApplication("test");
-		new BrailsoftLogFormatter(application);
+		Application application = new Application("test");
+		new LogFormatter(application);
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.brailsoft.base;
 
-public enum TestAuditType implements BrailsoftAuditType {
+public enum TestAuditType implements AuditType {
 	Opened("Opened");
 
 	private String type;

@@ -9,34 +9,34 @@ import java.util.logging.Level;
 
 import org.junit.jupiter.api.Test;
 
-class BrailsoftApplicationTest {
+class ApplicationTest {
 
 	@Test
 	void testValidConstructor() {
-		new BrailsoftApplication("valid");
+		new Application("valid");
 	}
 
 	@Test
 	void testApplicationName() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		assertEquals("test", test.applicationName());
 	}
 
 	@Test
 	void testNodeName() {
-		BrailsoftApplication test = new BrailsoftApplication("node");
+		Application test = new Application("node");
 		assertEquals("node", test.nodeName());
 	}
 
 	@Test
 	void testLoggerName() {
-		BrailsoftApplication test = new BrailsoftApplication("logger");
+		Application test = new Application("logger");
 		assertEquals("logger", test.loggerName());
 	}
 
 	@Test
 	void testLoggerDirectory() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
@@ -45,7 +45,7 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testLoggerFile() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
@@ -55,7 +55,7 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testAuditDirectory() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
@@ -64,7 +64,7 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testAuditFile() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
@@ -74,7 +74,7 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testArchiveDirectory() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
@@ -83,7 +83,7 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testArchiveFile() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
@@ -97,13 +97,13 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testLevel() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		assertEquals(Level.ALL, test.level());
 	}
 
 	@Test
 	void testChangedLevel() {
-		BrailsoftApplication test = new BrailsoftApplication("test") {
+		Application test = new Application("test") {
 			public Level level() {
 				return Level.OFF;
 			}
@@ -113,13 +113,13 @@ class BrailsoftApplicationTest {
 
 	@Test
 	void testVersion() {
-		BrailsoftApplication test = new BrailsoftApplication("test");
+		Application test = new Application("test");
 		assertEquals("1.0.0", test.version());
 	}
 
 	@Test
 	void testChangedVersion() {
-		BrailsoftApplication test = new BrailsoftApplication("test") {
+		Application test = new Application("test") {
 			public String version() {
 				return "2.0.1";
 			}
@@ -130,14 +130,14 @@ class BrailsoftApplicationTest {
 	@Test
 	void testNullArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftApplication(null);
+			new Application(null);
 		});
 	}
 
 	@Test
 	void testEmptyArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new BrailsoftApplication("");
+			new Application("");
 		});
 	}
 

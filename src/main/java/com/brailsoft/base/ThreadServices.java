@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
  * @author nevil
  *
  */
-public class BrailsoftExecutorService {
-	private static BrailsoftExecutorService instance = null;
+public class ThreadServices {
+	private static ThreadServices instance = null;
 
 	private ExecutorService executor = Executors.newFixedThreadPool(5);
 
@@ -23,17 +23,17 @@ public class BrailsoftExecutorService {
 	 * @return instance
 	 * @trhows AssertionError if application missing on first call.
 	 */
-	public synchronized static BrailsoftExecutorService getInstance(BrailsoftApplication... application) {
+	public synchronized static ThreadServices getInstance(Application... application) {
 		if (instance == null) {
 			assert (application != null);
 			assert (application.length == 1);
-			instance = new BrailsoftExecutorService();
+			instance = new ThreadServices();
 			instance.executor = Executors.newFixedThreadPool(application[0].executorServiceThreads());
 		}
 		return instance;
 	}
 
-	private BrailsoftExecutorService() {
+	private ThreadServices() {
 	}
 
 	public ExecutorService executor() {

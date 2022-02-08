@@ -11,18 +11,18 @@ import java.util.Objects;
  * @author nevil
  *
  */
-public class BrailsoftAuditRecord<T extends BrailsoftAuditType, O extends BrailsoftAuditObject>
-		implements Comparable<BrailsoftAuditRecord<T, O>> {
+public class AuditRecord<T extends AuditType, O extends AuditObject>
+		implements Comparable<AuditRecord<T, O>> {
 	private T auditType;
 	private O auditObject;
 	private String auditInformation;
 
 	private final DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(BrailsoftDateFormats.dateFormatForAuditRecord);
+			.ofPattern(DateFormats.dateFormatForAuditRecord);
 	private String user;
 	private ZonedDateTime timeStamp;
 
-	BrailsoftAuditRecord(T type, O object, String information) {
+	AuditRecord(T type, O object, String information) {
 		assert (type != null);
 		assert (object != null);
 		assert (information != null);
@@ -58,12 +58,12 @@ public class BrailsoftAuditRecord<T extends BrailsoftAuditType, O extends Brails
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BrailsoftAuditRecord<?, ?> that = (BrailsoftAuditRecord<?, ?>) obj;
+		AuditRecord<?, ?> that = (AuditRecord<?, ?>) obj;
 		return Objects.equals(this.timeStamp, that.timeStamp);
 	}
 
 	@Override
-	public int compareTo(BrailsoftAuditRecord<T, O> that) {
+	public int compareTo(AuditRecord<T, O> that) {
 		return this.timeStamp.compareTo(that.timeStamp);
 	}
 
