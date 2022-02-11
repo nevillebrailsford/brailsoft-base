@@ -1,6 +1,8 @@
 package com.brailsoft.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -197,6 +199,25 @@ class ApplicationTest {
 			}
 		};
 		assertEquals("2.0.1", test.version());
+	}
+
+	@Test
+	void testInformation() {
+		Application test = new Application("test") {
+			public String version() {
+				return "2.0.1";
+			}
+
+			@Override
+			public String description() {
+				return null;
+			}
+		};
+		assertNull(test.information());
+		test.setInformation(new Information() {
+		});
+		assertNotNull(test.information());
+
 	}
 
 	@Test
