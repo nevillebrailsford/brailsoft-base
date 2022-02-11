@@ -112,7 +112,7 @@ public abstract class Application {
 	 * 
 	 * @return description
 	 */
-	public abstract String desctiption();
+	public abstract String description();
 
 	/**
 	 * Change the number of threads that the executor service will use. Once the

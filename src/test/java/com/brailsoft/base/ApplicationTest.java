@@ -15,7 +15,7 @@ class ApplicationTest {
 	void testValidConstructor() {
 		new Application("valid") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -25,7 +25,7 @@ class ApplicationTest {
 	void testApplicationName() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -36,7 +36,7 @@ class ApplicationTest {
 	void testNodeName() {
 		Application test = new Application("node") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -47,7 +47,7 @@ class ApplicationTest {
 	void testLoggerName() {
 		Application test = new Application("logger") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -58,7 +58,7 @@ class ApplicationTest {
 	void testLoggerDirectory() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -72,7 +72,7 @@ class ApplicationTest {
 	void testLoggerFile() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -87,7 +87,7 @@ class ApplicationTest {
 	void testAuditDirectory() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -101,7 +101,7 @@ class ApplicationTest {
 	void testAuditFile() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -116,7 +116,7 @@ class ApplicationTest {
 	void testArchiveDirectory() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -130,7 +130,7 @@ class ApplicationTest {
 	void testArchiveFile() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -149,7 +149,7 @@ class ApplicationTest {
 	void testLevel() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -164,7 +164,7 @@ class ApplicationTest {
 			}
 
 			@Override
-			public String desctiption() {
+			public String description() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -176,7 +176,7 @@ class ApplicationTest {
 	void testVersion() {
 		Application test = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -191,7 +191,7 @@ class ApplicationTest {
 			}
 
 			@Override
-			public String desctiption() {
+			public String description() {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -204,7 +204,7 @@ class ApplicationTest {
 		assertThrows(AssertionError.class, () -> {
 			new Application(null) {
 				@Override
-				public String desctiption() {
+				public String description() {
 					return null;
 				}
 			};
@@ -216,7 +216,7 @@ class ApplicationTest {
 		assertThrows(AssertionError.class, () -> {
 			new Application("") {
 				@Override
-				public String desctiption() {
+				public String description() {
 					return null;
 				}
 			};

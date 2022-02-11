@@ -26,7 +26,7 @@ class AuditWriterTest {
 	void setUp() throws Exception {
 		Application app = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -43,7 +43,7 @@ class AuditWriterTest {
 	void tearDown() throws Exception {
 		Application app = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -60,7 +60,7 @@ class AuditWriterTest {
 	void testWriterCreation() {
 		Application app = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
@@ -74,7 +74,7 @@ class AuditWriterTest {
 	void testWriterWriter() {
 		Application app = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};

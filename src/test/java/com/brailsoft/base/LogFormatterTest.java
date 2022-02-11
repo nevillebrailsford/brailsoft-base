@@ -28,7 +28,7 @@ class LogFormatterTest {
 	void test() {
 		Application application = new Application("test") {
 			@Override
-			public String desctiption() {
+			public String description() {
 				return null;
 			}
 		};
