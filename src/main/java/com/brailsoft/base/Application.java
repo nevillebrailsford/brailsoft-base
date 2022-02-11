@@ -28,6 +28,7 @@ public abstract class Application {
 			.ofPattern(DateFormats.dateFormatForArchiveFileName);
 	private static int executorServiceThreads = 5;
 	private String applicationName;
+	private Information information;
 
 	/**
 	 * Create the application specific details.
@@ -75,6 +76,14 @@ public abstract class Application {
 
 	public final String archiveFile() {
 		return archiveFileFile().getAbsolutePath();
+	}
+
+	public Information information() {
+		return information;
+	}
+
+	public void setInformation(Information information) {
+		this.information = information;
 	}
 
 	/**
