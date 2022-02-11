@@ -24,7 +24,12 @@ class AuditWriterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -36,7 +41,12 @@ class AuditWriterTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -48,7 +58,12 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterCreation() {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
 		new AuditWriter(app);
@@ -57,12 +72,16 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterWriter() {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
 		AuditWriter writer = new AuditWriter(app);
-		AuditRecord<?, ?> record = new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File,
-				"message");
+		AuditRecord<?, ?> record = new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "message");
 		writer.write(record);
 		assertTrue(f.exists());
 	}

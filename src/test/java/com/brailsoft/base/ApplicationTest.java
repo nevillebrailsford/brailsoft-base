@@ -13,30 +13,55 @@ class ApplicationTest {
 
 	@Test
 	void testValidConstructor() {
-		new Application("valid");
+		new Application("valid") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 	}
 
 	@Test
 	void testApplicationName() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		assertEquals("test", test.applicationName());
 	}
 
 	@Test
 	void testNodeName() {
-		Application test = new Application("node");
+		Application test = new Application("node") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		assertEquals("node", test.nodeName());
 	}
 
 	@Test
 	void testLoggerName() {
-		Application test = new Application("logger");
+		Application test = new Application("logger") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		assertEquals("logger", test.loggerName());
 	}
 
 	@Test
 	void testLoggerDirectory() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
@@ -45,7 +70,12 @@ class ApplicationTest {
 
 	@Test
 	void testLoggerFile() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
@@ -55,7 +85,12 @@ class ApplicationTest {
 
 	@Test
 	void testAuditDirectory() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
@@ -64,7 +99,12 @@ class ApplicationTest {
 
 	@Test
 	void testAuditFile() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
@@ -74,7 +114,12 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveDirectory() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
@@ -83,7 +128,12 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveFile() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
@@ -97,7 +147,12 @@ class ApplicationTest {
 
 	@Test
 	void testLevel() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		assertEquals(Level.ALL, test.level());
 	}
 
@@ -107,13 +162,24 @@ class ApplicationTest {
 			public Level level() {
 				return Level.OFF;
 			}
+
+			@Override
+			public String desctiption() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		assertEquals(Level.OFF, test.level());
 	}
 
 	@Test
 	void testVersion() {
-		Application test = new Application("test");
+		Application test = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		assertEquals("1.0.0", test.version());
 	}
 
@@ -123,6 +189,12 @@ class ApplicationTest {
 			public String version() {
 				return "2.0.1";
 			}
+
+			@Override
+			public String desctiption() {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 		assertEquals("2.0.1", test.version());
 	}
@@ -130,14 +202,24 @@ class ApplicationTest {
 	@Test
 	void testNullArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new Application(null);
+			new Application(null) {
+				@Override
+				public String desctiption() {
+					return null;
+				}
+			};
 		});
 	}
 
 	@Test
 	void testEmptyArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new Application("");
+			new Application("") {
+				@Override
+				public String desctiption() {
+					return null;
+				}
+			};
 		});
 	}
 
