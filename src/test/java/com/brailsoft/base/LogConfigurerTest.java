@@ -26,7 +26,12 @@ class LogConfigurerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -38,7 +43,12 @@ class LogConfigurerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -50,7 +60,12 @@ class LogConfigurerTest {
 
 	@Test
 	void testsetup() {
-		Application app = new Application("test");
+		Application app = new Application("test") {
+			@Override
+			public String desctiption() {
+				return null;
+			}
+		};
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());
 		LogConfigurer.setUp(app);

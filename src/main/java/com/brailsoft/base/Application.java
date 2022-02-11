@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * @author nevil
  *
  */
-public class Application {
+public abstract class Application {
 	private static final String USER_HOME = "user.home";
 	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
@@ -108,6 +108,13 @@ public class Application {
 	}
 
 	/**
+	 * Describe this application
+	 * 
+	 * @return description
+	 */
+	public abstract String desctiption();
+
+	/**
 	 * Change the number of threads that the executor service will use. Once the
 	 * executor service has been created, this call will have no effect, however.
 	 * 
@@ -153,4 +160,5 @@ public class Application {
 		File archiveFile = new File(archiveDirectoryFile(), archiveFileName);
 		return archiveFile;
 	}
+
 }
