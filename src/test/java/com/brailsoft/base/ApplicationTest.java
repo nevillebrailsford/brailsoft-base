@@ -64,10 +64,12 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
 		assertEquals(f3.getAbsolutePath(), test.loggerDirectory());
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -78,11 +80,13 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "logs");
 		File f4 = new File(f3, "test.trace");
 		assertEquals(f4.getAbsolutePath(), test.loggerFile());
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -93,10 +97,12 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
 		assertEquals(f3.getAbsolutePath(), test.auditDirectory());
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -107,11 +113,13 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "audits");
 		File f4 = new File(f3, "test.audit");
 		assertEquals(f4.getAbsolutePath(), test.auditFile());
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -122,10 +130,12 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
 		assertEquals(f3.getAbsolutePath(), test.archiveDirectory());
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -136,6 +146,7 @@ class ApplicationTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
 		File f3 = new File(f2, "archives");
@@ -145,6 +156,7 @@ class ApplicationTest {
 		assertTrue(archiveFileName.startsWith(f4.getAbsolutePath()));
 		String pattern = "[0-9]{4}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}[-][0-9]{2}";
 		assertTrue(archiveFileName.substring(prefix.length()).matches(pattern));
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
