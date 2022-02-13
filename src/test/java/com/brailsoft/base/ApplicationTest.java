@@ -1,8 +1,6 @@
 package com.brailsoft.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,55 +13,30 @@ class ApplicationTest {
 
 	@Test
 	void testValidConstructor() {
-		new Application("valid") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		new Application("valid");
 	}
 
 	@Test
 	void testApplicationName() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		assertEquals("test", test.applicationName());
 	}
 
 	@Test
 	void testNodeName() {
-		Application test = new Application("node") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("node");
 		assertEquals("node", test.nodeName());
 	}
 
 	@Test
 	void testLoggerName() {
-		Application test = new Application("logger") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("logger");
 		assertEquals("logger", test.loggerName());
 	}
 
 	@Test
 	void testLoggerDirectory() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -74,12 +47,7 @@ class ApplicationTest {
 
 	@Test
 	void testLoggerFile() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -91,12 +59,7 @@ class ApplicationTest {
 
 	@Test
 	void testAuditDirectory() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -107,12 +70,7 @@ class ApplicationTest {
 
 	@Test
 	void testAuditFile() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -124,12 +82,7 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveDirectory() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -140,12 +93,7 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveFile() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -161,12 +109,7 @@ class ApplicationTest {
 
 	@Test
 	void testLevel() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		assertEquals(Level.ALL, test.level());
 	}
 
@@ -176,24 +119,13 @@ class ApplicationTest {
 			public Level level() {
 				return Level.OFF;
 			}
-
-			@Override
-			public String description() {
-				// TODO Auto-generated method stub
-				return null;
-			}
 		};
 		assertEquals(Level.OFF, test.level());
 	}
 
 	@Test
 	void testVersion() {
-		Application test = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application test = new Application("test");
 		assertEquals("1.0.0", test.version());
 	}
 
@@ -203,56 +135,21 @@ class ApplicationTest {
 			public String version() {
 				return "2.0.1";
 			}
-
-			@Override
-			public String description() {
-				// TODO Auto-generated method stub
-				return null;
-			}
 		};
 		assertEquals("2.0.1", test.version());
 	}
 
 	@Test
-	void testInformation() {
-		Application test = new Application("test") {
-			public String version() {
-				return "2.0.1";
-			}
-
-			@Override
-			public String description() {
-				return null;
-			}
-		};
-		assertNull(test.information());
-		test.setInformation(new Information() {
-		});
-		assertNotNull(test.information());
-
-	}
-
-	@Test
 	void testNullArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new Application(null) {
-				@Override
-				public String description() {
-					return null;
-				}
-			};
+			new Application(null);
 		});
 	}
 
 	@Test
 	void testEmptyArgumentConstructor() {
 		assertThrows(AssertionError.class, () -> {
-			new Application("") {
-				@Override
-				public String description() {
-					return null;
-				}
-			};
+			new Application("");
 		});
 	}
 

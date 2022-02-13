@@ -26,12 +26,7 @@ class LogConfigurerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
@@ -45,12 +40,7 @@ class LogConfigurerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
@@ -64,12 +54,7 @@ class LogConfigurerTest {
 
 	@Test
 	void testsetup() {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());

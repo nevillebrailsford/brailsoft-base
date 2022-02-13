@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * @author nevil
  *
  */
-public abstract class Application {
+public class Application {
 	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
 	private static final String AUDIT_DIRECTORY_NAME = "audits";
@@ -26,7 +26,6 @@ public abstract class Application {
 	private static final DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern(DateFormats.dateFormatForArchiveFileName);
 	private String applicationName;
-	private Information information;
 
 	/**
 	 * Create the application specific details.
@@ -76,14 +75,6 @@ public abstract class Application {
 		return archiveFileFile().getAbsolutePath();
 	}
 
-	public Information information() {
-		return information;
-	}
-
-	public void setInformation(Information information) {
-		this.information = information;
-	}
-
 	/**
 	 * This is the default trace level for this application. Override to change the
 	 * default setting.
@@ -103,13 +94,6 @@ public abstract class Application {
 	public String version() {
 		return "1.0.0";
 	}
-
-	/**
-	 * Describe this application
-	 * 
-	 * @return description
-	 */
-	public abstract String description();
 
 	private final File applicationWorkingDirectoryFile() {
 		File rootDirectory = ApplicationConfiguration.rootDirectory();
