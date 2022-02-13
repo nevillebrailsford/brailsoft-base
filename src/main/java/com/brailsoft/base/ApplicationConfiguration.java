@@ -7,7 +7,7 @@ package com.brailsoft.base;
  * @author nevil
  *
  */
-public class ApplicationRegister {
+public class ApplicationConfiguration {
 	private static Application registeredApplication = null;
 
 	/**
