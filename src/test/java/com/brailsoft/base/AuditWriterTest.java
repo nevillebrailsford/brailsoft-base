@@ -24,12 +24,7 @@ class AuditWriterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
@@ -43,12 +38,7 @@ class AuditWriterTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -61,12 +51,7 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterCreation() {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
@@ -76,12 +61,7 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterWriter() {
-		Application app = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application app = new Application("test");
 		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());

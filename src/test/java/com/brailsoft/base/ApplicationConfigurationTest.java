@@ -16,12 +16,7 @@ class ApplicationConfigurationTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		test = new Application("test") {
-			@Override
-			public String description() {
-				return "test";
-			}
-		};
+		test = new Application("test");
 	}
 
 	@AfterAll

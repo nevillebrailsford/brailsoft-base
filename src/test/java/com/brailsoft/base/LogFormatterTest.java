@@ -26,12 +26,7 @@ class LogFormatterTest {
 
 	@Test
 	void test() {
-		Application application = new Application("test") {
-			@Override
-			public String description() {
-				return null;
-			}
-		};
+		Application application = new Application("test");
 		new LogFormatter(application);
 	}
 
