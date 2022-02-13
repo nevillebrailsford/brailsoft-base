@@ -17,7 +17,6 @@ import java.util.logging.Level;
  *
  */
 public abstract class Application {
-	private static final String USER_HOME = "user.home";
 	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
 	private static final String AUDIT_DIRECTORY_NAME = "audits";
@@ -134,7 +133,7 @@ public abstract class Application {
 	}
 
 	private final File applicationWorkingDirectoryFile() {
-		File rootDirectory = new File(System.getProperty(USER_HOME));
+		File rootDirectory = ApplicationConfiguration.rootDirectory();
 		File applicationDirectory = new File(rootDirectory, applicationName);
 		return applicationDirectory;
 	}

@@ -1,6 +1,7 @@
 package com.brailsoft.base;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.AfterAll;
@@ -38,27 +39,55 @@ class ApplicationConfigurationTest {
 
 	@Test
 	void testRegister() {
-		ApplicationConfiguration.registerApplication(test);
+		ApplicationConfiguration.registerApplication(test, "root");
 	}
 
 	@Test
 	void testApplication() {
-		ApplicationConfiguration.registerApplication(test);
+		ApplicationConfiguration.registerApplication(test, "root");
 		assertEquals(test, ApplicationConfiguration.application());
 	}
 
 	@Test
-	void testNullParameter() {
+	void testRootDirectory() {
+		ApplicationConfiguration.registerApplication(test, "root");
+		assertNotNull(ApplicationConfiguration.rootDirectory());
+		assertEquals("root", ApplicationConfiguration.rootDirectory().getName());
+	}
+
+	@Test
+	void testNullAppParameter() {
 		assertThrows(AssertionError.class, () -> {
-			ApplicationConfiguration.registerApplication(null);
+			ApplicationConfiguration.registerApplication(null, "root");
+		});
+	}
+
+	@Test
+	void testNullDirParameter() {
+		assertThrows(AssertionError.class, () -> {
+			ApplicationConfiguration.registerApplication(test, null);
+		});
+	}
+
+	@Test
+	void testEmptyDirParameter() {
+		assertThrows(AssertionError.class, () -> {
+			ApplicationConfiguration.registerApplication(test, "");
+		});
+	}
+
+	@Test
+	void testBlankDirParameter() {
+		assertThrows(AssertionError.class, () -> {
+			ApplicationConfiguration.registerApplication(test, "   ");
 		});
 	}
 
 	@Test
 	void testDuplicateRegister() {
 		assertThrows(AssertionError.class, () -> {
-			ApplicationConfiguration.registerApplication(test);
-			ApplicationConfiguration.registerApplication(test);
+			ApplicationConfiguration.registerApplication(test, "root");
+			ApplicationConfiguration.registerApplication(test, "root");
 		});
 	}
 

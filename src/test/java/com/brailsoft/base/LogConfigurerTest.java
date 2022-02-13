@@ -32,6 +32,7 @@ class LogConfigurerTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -39,6 +40,7 @@ class LogConfigurerTest {
 			}
 			Files.deleteIfExists(f.toPath());
 		}
+		ApplicationConfiguration.clear();
 	}
 
 	@AfterEach
@@ -49,6 +51,7 @@ class LogConfigurerTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -56,6 +59,7 @@ class LogConfigurerTest {
 			}
 			Files.deleteIfExists(f.toPath());
 		}
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -66,11 +70,13 @@ class LogConfigurerTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());
 		LogConfigurer.setUp(app);
 		assertTrue(f.exists());
 		LogConfigurer.shutdown();
+		ApplicationConfiguration.clear();
 	}
 
 	@Test

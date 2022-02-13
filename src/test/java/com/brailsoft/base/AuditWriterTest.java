@@ -30,6 +30,7 @@ class AuditWriterTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditDirectory());
 		if (f.exists()) {
 			for (File f2 : f.listFiles()) {
@@ -37,6 +38,7 @@ class AuditWriterTest {
 			}
 			Files.deleteIfExists(f.toPath());
 		}
+		ApplicationConfiguration.clear();
 	}
 
 	@AfterEach
@@ -54,6 +56,7 @@ class AuditWriterTest {
 			}
 			Files.deleteIfExists(f.toPath());
 		}
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
@@ -64,6 +67,7 @@ class AuditWriterTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
 		new AuditWriter(app);
@@ -78,6 +82,7 @@ class AuditWriterTest {
 				return null;
 			}
 		};
+		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
 		AuditWriter writer = new AuditWriter(app);
