@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ApplicationRegisterTest {
+class ApplicationConfigurationTest {
 
 	private static Application test;
 
@@ -33,39 +33,39 @@ class ApplicationRegisterTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		ApplicationRegister.clear();
+		ApplicationConfiguration.clear();
 	}
 
 	@Test
 	void testRegister() {
-		ApplicationRegister.registerApplication(test);
+		ApplicationConfiguration.registerApplication(test);
 	}
 
 	@Test
 	void testApplication() {
-		ApplicationRegister.registerApplication(test);
-		assertEquals(test, ApplicationRegister.application());
+		ApplicationConfiguration.registerApplication(test);
+		assertEquals(test, ApplicationConfiguration.application());
 	}
 
 	@Test
 	void testNullParameter() {
 		assertThrows(AssertionError.class, () -> {
-			ApplicationRegister.registerApplication(null);
+			ApplicationConfiguration.registerApplication(null);
 		});
 	}
 
 	@Test
 	void testDuplicateRegister() {
 		assertThrows(AssertionError.class, () -> {
-			ApplicationRegister.registerApplication(test);
-			ApplicationRegister.registerApplication(test);
+			ApplicationConfiguration.registerApplication(test);
+			ApplicationConfiguration.registerApplication(test);
 		});
 	}
 
 	@Test
 	void testNeverRegistered() {
 		assertThrows(AssertionError.class, () -> {
-			ApplicationRegister.application();
+			ApplicationConfiguration.application();
 		});
 	}
 
