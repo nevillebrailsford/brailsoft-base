@@ -19,16 +19,12 @@ public class ThreadServices {
 	 * only the first call to getInstance(). Once created, the instance has been
 	 * created, the parameter may be omitted.
 	 * 
-	 * @param application
 	 * @return instance
-	 * @trhows AssertionError if application missing on first call.
 	 */
-	public synchronized static ThreadServices getInstance(Application... application) {
+	public synchronized static ThreadServices getInstance() {
 		if (instance == null) {
-			assert (application != null);
-			assert (application.length == 1);
 			instance = new ThreadServices();
-			instance.executor = Executors.newFixedThreadPool(application[0].executorServiceThreads());
+			instance.executor = Executors.newFixedThreadPool(ApplicationConfiguration.executorServiceThreads());
 		}
 		return instance;
 	}

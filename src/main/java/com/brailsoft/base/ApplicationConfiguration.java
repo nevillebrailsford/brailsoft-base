@@ -14,6 +14,7 @@ public class ApplicationConfiguration {
 	private static Application registeredApplication = null;
 	private static Logger logger = null;
 	private static File rootDir = null;
+	private static int executorServiceThreads = 5;
 
 	/**
 	 * Register the application class for this app.
@@ -74,4 +75,25 @@ public class ApplicationConfiguration {
 		assert (rootDir != null);
 		return rootDir;
 	}
+
+	/**
+	 * This is the number of ExecutorService threads required in the thread pool.
+	 * This defaults to 5.
+	 * 
+	 * @return number of threads.
+	 */
+	public static int executorServiceThreads() {
+		return executorServiceThreads;
+	}
+
+	/**
+	 * Change the number of threads that the executor service will use. Once the
+	 * executor service has been created, this call will have no effect, however.
+	 * 
+	 * @param number
+	 */
+	public static void setExecutorServiceThreads(int number) {
+		ApplicationConfiguration.executorServiceThreads = number;
+	}
+
 }

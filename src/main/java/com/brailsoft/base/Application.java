@@ -25,7 +25,6 @@ public abstract class Application {
 	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
 	private static final DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern(DateFormats.dateFormatForArchiveFileName);
-	private static int executorServiceThreads = 5;
 	private String applicationName;
 	private Information information;
 
@@ -106,31 +105,11 @@ public abstract class Application {
 	}
 
 	/**
-	 * This is the number of ExecutorService threads required in the thread pool.
-	 * This defaults to 5.
-	 * 
-	 * @return number of threads.
-	 */
-	public int executorServiceThreads() {
-		return executorServiceThreads;
-	}
-
-	/**
 	 * Describe this application
 	 * 
 	 * @return description
 	 */
 	public abstract String description();
-
-	/**
-	 * Change the number of threads that the executor service will use. Once the
-	 * executor service has been created, this call will have no effect, however.
-	 * 
-	 * @param number
-	 */
-	public void setExecutorServiceThreads(int number) {
-		executorServiceThreads = number;
-	}
 
 	private final File applicationWorkingDirectoryFile() {
 		File rootDirectory = ApplicationConfiguration.rootDirectory();
