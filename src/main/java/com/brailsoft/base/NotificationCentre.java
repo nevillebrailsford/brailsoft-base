@@ -8,20 +8,26 @@ public class NotificationCentre {
 
 	public static void addListener(NotificationListener listener) {
 		assert (!listeners.contains(listener));
-		listeners.add(listener);
+		synchronized (listeners) {
+			listeners.add(listener);
+		}
 	}
 
 	public static void removeListener(NotificationListener listener) {
 		assert (listeners.contains(listener));
-		listeners.remove(listener);
+		synchronized (listeners) {
+			listeners.remove(listener);
+		}
 	}
 
 	public static void broadcast(Notification notification) {
-		new Thread(() -> {
+		synchronized (listeners) {
 			listeners.stream().forEach(listener -> {
-				listener.notify(notification);
+				new Thread(() -> {
+					listener.notify(notification);
+				}).start();
 			});
-		}).start();
+		}
 	}
 
 	public static void clear() {
