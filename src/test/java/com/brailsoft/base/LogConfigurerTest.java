@@ -1,11 +1,11 @@
 package com.brailsoft.base;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.logging.Level;
 
 import org.junit.jupiter.api.AfterAll;
@@ -13,8 +13,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class LogConfigurerTest {
+
+	@TempDir
+	File rootDirectory;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -27,62 +31,51 @@ class LogConfigurerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		Application app = new Application("test");
-		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
-		File f = new File(app.loggerDirectory());
-		if (f.exists()) {
-			for (File f2 : f.listFiles()) {
-				Files.deleteIfExists(f2.toPath());
-			}
-			Files.deleteIfExists(f.toPath());
-		}
+		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		ApplicationConfiguration.clear();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		Application app = new Application("test");
-		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
-		File f = new File(app.loggerDirectory());
-		if (f.exists()) {
-			for (File f2 : f.listFiles()) {
-				Files.deleteIfExists(f2.toPath());
-			}
-			Files.deleteIfExists(f.toPath());
-		}
+		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		ApplicationConfiguration.clear();
 	}
 
 	@Test
 	void testsetup() {
 		Application app = new Application("test");
-		ApplicationConfiguration.registerApplication(app, System.getProperty("user.home"));
+		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());
-		LogConfigurer.setUp(app);
+		LogConfigurer.setUp();
 		assertTrue(f.exists());
 		LogConfigurer.shutdown();
 		ApplicationConfiguration.clear();
 	}
 
 	@Test
-	void testNullArgumentSetup() {
-		assertThrows(AssertionError.class, () -> {
-			LogConfigurer.setUp(null);
-		});
-	}
-
-	@Test
 	void testSetLevelNoSetup() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalStateException.class, () -> {
 			LogConfigurer.changeLevel(Level.ALL);
 		});
+		assertEquals("LogConfigurer - setup has not been called", exc.getMessage());
 	}
 
 	@Test
 	void testShutdownlNoSetup() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalStateException.class, () -> {
 			LogConfigurer.shutdown();
 		});
+		assertEquals("LogConfigurer - setup has not been called", exc.getMessage());
+	}
+
+	@Test
+	void testNoRegistration() {
+		Exception exc = assertThrows(IllegalStateException.class, () -> {
+			LogConfigurer.setUp();
+		});
+		assertEquals("ApplicationConfiguration - registeredApplication is null", exc.getMessage());
 	}
 
 }

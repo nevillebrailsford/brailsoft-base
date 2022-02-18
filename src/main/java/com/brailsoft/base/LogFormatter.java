@@ -10,8 +10,7 @@ import java.util.logging.LogRecord;
 
 public class LogFormatter extends Formatter {
 
-	private final static DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(DateFormats.dateFormatForLogRecord);
+	private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.dateFormatForLogRecord);
 	private final static char lineEnd = 10;
 	private final static String ENTRY = ">";
 	private final static String EXIT = "<";
@@ -26,8 +25,11 @@ public class LogFormatter extends Formatter {
 
 	private Application application;
 
-	public LogFormatter(Application application) {
-		assert (application != null);
+	public LogFormatter() {
+		Application application = ApplicationConfiguration.application();
+		if (application == null) {
+			throw new IllegalStateException("LogFormatter = application is null");
+		}
 		this.application = application;
 	}
 

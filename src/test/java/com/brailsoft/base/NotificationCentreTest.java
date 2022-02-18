@@ -59,9 +59,10 @@ class NotificationCentreTest {
 	@Test
 	void testAddDuplicateListener() {
 		NotificationCentre.addListener(listener);
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			NotificationCentre.addListener(listener);
 		});
+		assertEquals("NotificationCenter - listener already registered", exc.getMessage());
 	}
 
 	@Test
@@ -72,9 +73,10 @@ class NotificationCentreTest {
 
 	@Test
 	void testRemoveMissingListener() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			NotificationCentre.removeListener(listener);
 		});
+		assertEquals("NotificationCenter - listener not registered", exc.getMessage());
 	}
 
 	@Test

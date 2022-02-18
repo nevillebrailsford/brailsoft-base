@@ -41,23 +41,26 @@ class NotificationTest {
 
 	@Test
 	void testCreationTooManySubject() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Notification(TestNotificationType.Test, this, "one", "two");
 		});
+		assertEquals("Notification - too many subject objects", exc.getMessage());
 	}
 
 	@Test
 	void testCreationMissingType() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Notification(null, this, "test");
 		});
+		assertEquals("Notification - notification is null", exc.getMessage());
 	}
 
 	@Test
 	void testCreationMissingSource() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Notification(TestNotificationType.Test, null, "test");
 		});
+		assertEquals("Notification - source is null", exc.getMessage());
 	}
 
 	@Test

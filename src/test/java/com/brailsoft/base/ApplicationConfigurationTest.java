@@ -52,45 +52,52 @@ class ApplicationConfigurationTest {
 
 	@Test
 	void testNullAppParameter() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			ApplicationConfiguration.registerApplication(null, "root");
 		});
+		assertEquals("ApplicationConfiguration - application is null", exc.getMessage());
 	}
 
 	@Test
 	void testNullDirParameter() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			ApplicationConfiguration.registerApplication(test, null);
 		});
+		assertEquals("ApplicationConfiguration - rootDirectory is null", exc.getMessage());
 	}
 
 	@Test
 	void testEmptyDirParameter() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			ApplicationConfiguration.registerApplication(test, "");
 		});
+		assertEquals("ApplicationConfiguration - rootDirectory is empty", exc.getMessage());
 	}
 
 	@Test
 	void testBlankDirParameter() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			ApplicationConfiguration.registerApplication(test, "   ");
 		});
+		assertEquals("ApplicationConfiguration - rootDirectory is empty", exc.getMessage());
 	}
 
 	@Test
 	void testDuplicateRegister() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalStateException.class, () -> {
 			ApplicationConfiguration.registerApplication(test, "root");
 			ApplicationConfiguration.registerApplication(test, "root");
 		});
+		assertEquals("ApplicationConfiguration - registeredApplication is not null", exc.getMessage());
+
 	}
 
 	@Test
 	void testNeverRegistered() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalStateException.class, () -> {
 			ApplicationConfiguration.application();
 		});
+		assertEquals("ApplicationConfiguration - registeredApplication is null", exc.getMessage());
 	}
 
 }

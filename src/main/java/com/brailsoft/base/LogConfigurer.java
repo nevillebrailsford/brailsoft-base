@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 /**
  * Configure the java logging infrastructure and ensure there is only a file
  * handler registered. Information specific to an application is passed into the
- * class by a Application instance. The onlt changes that can be made
- * to the logging facility is to change the level of trace recording. It is
- * important that shutdown is called to ensure that all logging infotmation is
- * written out and files are closed.
+ * class by a Application instance. The onlt changes that can be made to the
+ * logging facility is to change the level of trace recording. It is important
+ * that shutdown is called to ensure that all logging infotmation is written out
+ * and files are closed.
  * 
  * @author nevil
  *
@@ -29,13 +29,18 @@ public class LogConfigurer {
 	 * Remove any existing handlers registered with the logging service and create
 	 * our file handler
 	 * 
-	 * @param application
-	 * @throws AssetionError if application is null,or the logging directory could
-	 *                       not be created, or setup has already been called.
+	 * @throws IllegalStateException if application is null,or the logging directory
+	 *                               could not be created, or setup has already been
+	 *                               called.
 	 */
-	public synchronized static void setUp(Application application) {
-		assert (!setup);
-		assert (application != null);
+	public synchronized static void setUp() {
+		if (setup) {
+			throw new IllegalStateException("LogConfigurer - setup already called");
+		}
+		Application application = ApplicationConfiguration.application();
+		if (application == null) {
+			throw new IllegalStateException("LogConfigurer - application is null");
+		}
 		LOGGER = Logger.getLogger(application.loggerName());
 		Logger parent = LOGGER;
 		while (parent != null) {
@@ -49,12 +54,14 @@ public class LogConfigurer {
 
 		File logDirectory = new File(application.loggerDirectory());
 		if (!logDirectory.exists()) {
-			assert (logDirectory.mkdirs());
+			if (!logDirectory.mkdirs()) {
+				throw new IllegalStateException("LogConfigurer - could not create directory");
+			}
 		}
 		String logfileName = new File(application.loggerFile()).getAbsolutePath();
 		try {
 			fileHandler = new FileHandler(logfileName, 1000000000l, 1, false);
-			fileHandler.setFormatter(new LogFormatter(application));
+			fileHandler.setFormatter(new LogFormatter());
 			LOGGER.addHandler(fileHandler);
 		} catch (SecurityException e) {
 			e.printStackTrace();
@@ -73,11 +80,16 @@ public class LogConfigurer {
 	 * Update all handler to the new level of logging
 	 * 
 	 * @param level
-	 * @throws AssertionError if level is null or setup has not been called.
+	 * @throws IllegalArgumentException if level is null.
+	 * @throws IllegalStateException    if setup has not been called.
 	 */
 	public synchronized static void changeLevel(Level level) {
-		assert (setup);
-		assert (level != null);
+		if (!setup) {
+			throw new IllegalStateException("LogConfigurer - setup has not been called");
+		}
+		if (level == null) {
+			throw new IllegalArgumentException("LogConfigurer - setup has not been called");
+		}
 		Logger parent = LOGGER;
 		while (parent != null) {
 			for (Handler handler : parent.getHandlers()) {
@@ -93,10 +105,12 @@ public class LogConfigurer {
 	/**
 	 * shutdown logging services, flush data to storage and close logging file
 	 * 
-	 * @throws AssertError if setup has not been called.
+	 * @throws IllegalStateException if setup has not been called.
 	 */
 	public synchronized static void shutdown() {
-		assert (setup);
+		if (!setup) {
+			throw new IllegalStateException("LogConfigurer - setup has not been called");
+		}
 		fileHandler.flush();
 		fileHandler.close();
 		setup = false;

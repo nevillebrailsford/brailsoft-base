@@ -31,11 +31,15 @@ public class Application {
 	 * Create the application specific details.
 	 * 
 	 * @param applicationName
-	 * @throws AssertionError if applicationName is null or empty
+	 * @throws IllegalArgumentException if applicationName is null or empty
 	 */
 	public Application(String applicationName) {
-		assert (applicationName != null);
-		assert (!applicationName.isEmpty());
+		if (applicationName == null) {
+			throw new IllegalArgumentException("Application - applicationName is null");
+		}
+		if (applicationName.trim().isEmpty()) {
+			throw new IllegalArgumentException("Application - applicationName is empty");
+		}
 		this.applicationName = applicationName;
 	}
 

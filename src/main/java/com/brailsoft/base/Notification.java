@@ -9,10 +9,24 @@ public class Notification {
 
 	private Object subject = null;
 
+	/**
+	 * 
+	 * @param notificationType
+	 * @param source
+	 * @param subject
+	 * @throws IllegalAtgrmentException if notificationType is null, source is null,
+	 *                                  or there are more than 1 subject objects.
+	 */
 	public Notification(NotificationType notificationType, Object source, Object... subject) {
-		assert (notificationType != null);
-		assert (source != null);
-		assert (subject.length < 2);
+		if (notificationType == null) {
+			throw new IllegalArgumentException("Notification - notification is null");
+		}
+		if (source == null) {
+			throw new IllegalArgumentException("Notification - source is null");
+		}
+		if (subject.length > 1) {
+			throw new IllegalArgumentException("Notification - too many subject objects");
+		}
 		this.notificationType = notificationType;
 		this.source = source;
 		if (subject.length == 1) {
