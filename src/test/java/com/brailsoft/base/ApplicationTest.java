@@ -141,16 +141,18 @@ class ApplicationTest {
 
 	@Test
 	void testNullArgumentConstructor() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Application(null);
 		});
+		assertEquals("Application - applicationName is null", exc.getMessage());
 	}
 
 	@Test
 	void testEmptyArgumentConstructor() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Application("");
 		});
+		assertEquals("Application - applicationName is empty", exc.getMessage());
 	}
 
 }

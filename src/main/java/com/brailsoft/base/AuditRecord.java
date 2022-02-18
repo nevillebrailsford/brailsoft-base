@@ -11,22 +11,37 @@ import java.util.Objects;
  * @author nevil
  *
  */
-public class AuditRecord<T extends AuditType, O extends AuditObject>
-		implements Comparable<AuditRecord<T, O>> {
+public class AuditRecord<T extends AuditType, O extends AuditObject> implements Comparable<AuditRecord<T, O>> {
 	private T auditType;
 	private O auditObject;
 	private String auditInformation;
 
-	private final DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(DateFormats.dateFormatForAuditRecord);
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.dateFormatForAuditRecord);
 	private String user;
 	private ZonedDateTime timeStamp;
 
+	/**
+	 * Create an audit record
+	 * 
+	 * @param type
+	 * @param object
+	 * @param information
+	 * @trhows IllegalArgumentException if type is null, object is null, or
+	 *         information is null or empty.
+	 */
 	AuditRecord(T type, O object, String information) {
-		assert (type != null);
-		assert (object != null);
-		assert (information != null);
-		assert (!information.trim().isEmpty());
+		if (type == null) {
+			throw new IllegalArgumentException("AuditRecord - type is null");
+		}
+		if (object == null) {
+			throw new IllegalArgumentException("AuditRecord - object is null");
+		}
+		if (information == null) {
+			throw new IllegalArgumentException("AuditRecord - information is null");
+		}
+		if (information.trim().isEmpty()) {
+			throw new IllegalArgumentException("AuditRecord - information is empty");
+		}
 		auditType = type;
 		auditObject = object;
 		auditInformation = information;

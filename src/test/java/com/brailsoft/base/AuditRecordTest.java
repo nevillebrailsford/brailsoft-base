@@ -1,5 +1,6 @@
 package com.brailsoft.base;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,37 +37,42 @@ class AuditRecordTest {
 
 	@Test
 	void testNullType() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new AuditRecord<>(null, TestAuditObject.File, "message");
 		});
+		assertEquals("AuditRecord - type is null", exc.getMessage());
 	}
 
 	@Test
 	void testNullObject() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new AuditRecord<>(TestAuditType.Opened, null, "message");
 		});
+		assertEquals("AuditRecord - object is null", exc.getMessage());
 	}
 
 	@Test
 	void testNullMessage() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, null);
 		});
+		assertEquals("AuditRecord - information is null", exc.getMessage());
 	}
 
 	@Test
 	void testEmptyMessage() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "");
 		});
+		assertEquals("AuditRecord - information is empty", exc.getMessage());
 	}
 
 	@Test
 	void testBlankMessage() {
-		assertThrows(AssertionError.class, () -> {
+		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new AuditRecord<>(TestAuditType.Opened, TestAuditObject.File, "       ");
 		});
+		assertEquals("AuditRecord - information is empty", exc.getMessage());
 	}
 
 }

@@ -7,14 +7,18 @@ public class NotificationCentre {
 	public static final List<NotificationListener> listeners = new ArrayList<>();
 
 	public static void addListener(NotificationListener listener) {
-		assert (!listeners.contains(listener));
+		if (listeners.contains(listener)) {
+			throw new IllegalArgumentException("NotificationCenter - listener already registered");
+		}
 		synchronized (listeners) {
 			listeners.add(listener);
 		}
 	}
 
 	public static void removeListener(NotificationListener listener) {
-		assert (listeners.contains(listener));
+		if (!listeners.contains(listener)) {
+			throw new IllegalArgumentException("NotificationCenter - listener not registered");
+		}
 		synchronized (listeners) {
 			listeners.remove(listener);
 		}
