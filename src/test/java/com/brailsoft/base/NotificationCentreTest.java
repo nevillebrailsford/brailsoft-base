@@ -82,7 +82,7 @@ class NotificationCentreTest {
 	@Test
 	void testBroadcastNoSubject() throws InterruptedException {
 		NotificationCentre.addListener(listener);
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this);
+		Notification notification = new Notification(TestNotificationType.Test, this);
 		assertFalse(notified);
 		assertNull(notificationReceived);
 		synchronized (waitForNotify) {
@@ -97,7 +97,7 @@ class NotificationCentreTest {
 	@Test
 	void testBroadcastWithSubject() throws InterruptedException {
 		NotificationCentre.addListener(listener);
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this, "test");
+		Notification notification = new Notification(TestNotificationType.Test, this, "test");
 		assertFalse(notified);
 		assertNull(notificationReceived);
 		synchronized (waitForNotify) {

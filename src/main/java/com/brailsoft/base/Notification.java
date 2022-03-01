@@ -2,12 +2,12 @@ package com.brailsoft.base;
 
 import java.util.Optional;
 
-public class Notification<S extends Object> {
+public class Notification {
 	private NotificationType notificationType;
 
 	private Object source;
 
-	private S subject = null;
+	private Object subject = null;
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class Notification<S extends Object> {
 	 * @throws IllegalAtgrmentException if notificationType is null, source is null,
 	 *                                  or there are more than 1 subject objects.
 	 */
-	public Notification(NotificationType notificationType, Object source, S... subject) {
+	public Notification(NotificationType notificationType, Object source, Object... subject) {
 		if (notificationType == null) {
 			throw new IllegalArgumentException("Notification - notification is null");
 		}
@@ -51,7 +51,7 @@ public class Notification<S extends Object> {
 	/**
 	 * @return the subject
 	 */
-	public Optional<S> subject() {
+	public Optional<Object> subject() {
 		return Optional.ofNullable(subject);
 	}
 }

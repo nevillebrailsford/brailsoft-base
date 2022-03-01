@@ -31,18 +31,18 @@ class NotificationTest {
 
 	@Test
 	void testCreation() {
-		assertNotNull(new Notification<String>(TestNotificationType.Test, this, "test"));
+		assertNotNull(new Notification(TestNotificationType.Test, this, "test"));
 	}
 
 	@Test
 	void testCreationNoSubject() {
-		assertNotNull(new Notification<>(TestNotificationType.Test, this));
+		assertNotNull(new Notification(TestNotificationType.Test, this));
 	}
 
 	@Test
 	void testCreationTooManySubject() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
-			new Notification<String>(TestNotificationType.Test, this, "one", "two");
+			new Notification(TestNotificationType.Test, this, "one", "two");
 		});
 		assertEquals("Notification - too many subject objects", exc.getMessage());
 	}
@@ -50,7 +50,7 @@ class NotificationTest {
 	@Test
 	void testCreationMissingType() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
-			new Notification<String>(null, this, "test");
+			new Notification(null, this, "test");
 		});
 		assertEquals("Notification - notification is null", exc.getMessage());
 	}
@@ -58,33 +58,33 @@ class NotificationTest {
 	@Test
 	void testCreationMissingSource() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
-			new Notification<String>(TestNotificationType.Test, null, "test");
+			new Notification(TestNotificationType.Test, null, "test");
 		});
 		assertEquals("Notification - source is null", exc.getMessage());
 	}
 
 	@Test
 	void testNotificationType() {
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this, "test");
+		Notification notification = new Notification(TestNotificationType.Test, this, "test");
 		assertEquals(TestNotificationType.Test, notification.notificationType());
 	}
 
 	@Test
 	void testNotificationSource() {
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this, "test");
+		Notification notification = new Notification(TestNotificationType.Test, this, "test");
 		assertEquals(this, notification.source());
 	}
 
 	@Test
 	void testNotificationSubject() {
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this, "this");
+		Notification notification = new Notification(TestNotificationType.Test, this, "this");
 		assertTrue(notification.subject().isPresent());
 		assertEquals("this", notification.subject().get());
 	}
 
 	@Test
 	void testNotificationSubjectEmpty() {
-		Notification<String> notification = new Notification<>(TestNotificationType.Test, this);
+		Notification notification = new Notification(TestNotificationType.Test, this);
 		assertTrue(notification.subject().isEmpty());
 	}
 
