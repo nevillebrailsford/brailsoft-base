@@ -54,4 +54,21 @@ public class Notification {
 	public Optional<Object> subject() {
 		return Optional.ofNullable(subject);
 	}
+
+	@Override
+	/**
+	 * @return the notification in string format
+	 */
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(notificationType.getClass().getSimpleName()).append(".").append(notificationType).append(" ");
+		builder.append(source.getClass().getSimpleName()).append(" ");
+		if (subject == null) {
+			builder.append("null");
+		} else {
+			builder.append(subject);
+		}
+		return builder.toString();
+	}
+
 }
