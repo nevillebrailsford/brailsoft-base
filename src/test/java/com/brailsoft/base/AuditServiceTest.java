@@ -17,7 +17,7 @@ class AuditServiceTest {
 	@TempDir
 	File rootDirectory;
 
-	private Application app;
+	private ApplicationDecsriptor app;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -29,7 +29,7 @@ class AuditServiceTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		app = new Application("test");
+		app = new ApplicationDecsriptor("test");
 	}
 
 	@AfterEach

@@ -27,7 +27,7 @@ class AuditWriterTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		ApplicationConfiguration.clear();
 	}
@@ -39,7 +39,7 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterCreation() {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());
@@ -49,7 +49,7 @@ class AuditWriterTest {
 
 	@Test
 	void testWriterWriter() {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		File f = new File(app.auditFile());
 		assertFalse(f.exists());

@@ -36,8 +36,8 @@ class LogFormatterTest {
 
 	@Test
 	void test() {
-		Application application = new Application("test");
-		ApplicationConfiguration.registerApplication(application, rootDirectory.getAbsolutePath());
+		ApplicationDecsriptor applicationDecsriptor = new ApplicationDecsriptor("test");
+		ApplicationConfiguration.registerApplication(applicationDecsriptor, rootDirectory.getAbsolutePath());
 		new LogFormatter();
 	}
 

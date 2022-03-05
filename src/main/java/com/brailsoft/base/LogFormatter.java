@@ -23,14 +23,14 @@ public class LogFormatter extends Formatter {
 	private final static String FINER = "r";
 	private final static String FINEST = "t";
 
-	private Application application;
+	private ApplicationDecsriptor applicationDecsriptor;
 
 	public LogFormatter() {
-		Application application = ApplicationConfiguration.application();
-		if (application == null) {
-			throw new IllegalStateException("LogFormatter = application is null");
+		ApplicationDecsriptor applicationDecsriptor = ApplicationConfiguration.applicationDecsriptor();
+		if (applicationDecsriptor == null) {
+			throw new IllegalStateException("LogFormatter = applicationDecsriptor is null");
 		}
-		this.application = application;
+		this.applicationDecsriptor = applicationDecsriptor;
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class LogFormatter extends Formatter {
 	private String processConfig(LogRecord record) {
 		StringBuilder builder = new StringBuilder();
 		builder.append("************ Start Display Current Environment ************").append(lineEnd);
-		builder.append("application: ").append(application.applicationName()).append(lineEnd);
-		builder.append("version: ").append(application.version()).append(lineEnd);
+		builder.append("applicationDecsriptor: ").append(applicationDecsriptor.applicationName()).append(lineEnd);
+		builder.append("version: ").append(applicationDecsriptor.version()).append(lineEnd);
 		builder.append("os.name: ").append(System.getProperty("os.name")).append(lineEnd);
 		builder.append("java.version: ").append(System.getProperty("java.version")).append(lineEnd);
 		builder.append("java.home: ").append(System.getProperty("java.home")).append(lineEnd);
