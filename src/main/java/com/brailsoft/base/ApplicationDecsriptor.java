@@ -11,7 +11,7 @@ import java.util.logging.Level;
  * Information such as the nodename for configuration details, log file
  * directory and so forth can be obtained from this class.
  * <p>
- * All public methods are final excepti Level() and version().
+ * All public methods are final except Level() and version().
  * 
  * @author nevil
  *
@@ -23,6 +23,8 @@ public class ApplicationDecsriptor {
 	private static final String AUDIT_FILE_SUFFIX = ".audit";
 	private static final String ARCHIVE_DIRECTORY_NAME = "archives";
 	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
+	private static final String INIFILE_DIRECTORY_NAME = "inifiles";
+	private static final String INIFILE_SUFFIX = "ini";
 	private static final DateTimeFormatter formatter = DateTimeFormatter
 			.ofPattern(DateFormats.dateFormatForArchiveFileName);
 	private String applicationName;
@@ -77,6 +79,14 @@ public class ApplicationDecsriptor {
 
 	public final String archiveFile() {
 		return archiveFileFile().getAbsolutePath();
+	}
+
+	public final String iniFileDirectory() {
+		return iniFileDirectoryFile().getAbsolutePath();
+	}
+
+	public final String iniFile() {
+		return iniFileFile().getAbsolutePath();
 	}
 
 	/**
@@ -134,6 +144,16 @@ public class ApplicationDecsriptor {
 		String archiveFileName = applicationName + ARCHIVE_FILE_SUFFIX + formatter.format(LocalDateTime.now());
 		File archiveFile = new File(archiveDirectoryFile(), archiveFileName);
 		return archiveFile;
+	}
+
+	private final File iniFileDirectoryFile() {
+		File iniFileDirectory = new File(applicationWorkingDirectoryFile(), INIFILE_DIRECTORY_NAME);
+		return iniFileDirectory;
+	}
+
+	private final File iniFileFile() {
+		File iniFile = new File(iniFileDirectoryFile(), applicationName + INIFILE_SUFFIX);
+		return iniFile;
 	}
 
 }
