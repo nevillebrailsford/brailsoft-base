@@ -30,21 +30,21 @@ class LogConfigurerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		ApplicationConfiguration.clear();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		ApplicationConfiguration.clear();
 	}
 
 	@Test
 	void testsetup() {
-		Application app = new Application("test");
+		ApplicationDecsriptor app = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(app, rootDirectory.getAbsolutePath());
 		File f = new File(app.loggerDirectory());
 		assertFalse(f.exists());

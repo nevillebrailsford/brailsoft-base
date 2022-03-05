@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 /**
- * Application contains information specific to an application using
+ * ApplicationDecsriptor contains information specific to an application using
  * brailsoft.base as a base for logging, configuration and auditing functions.
  * Information such as the nodename for configuration details, log file
  * directory and so forth can be obtained from this class.
@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * @author nevil
  *
  */
-public class Application {
+public class ApplicationDecsriptor {
 	private static final String LOG_DIRECTORY_NAME = "logs";
 	private static final String LOG_FILE_SUFFIX = ".trace";
 	private static final String AUDIT_DIRECTORY_NAME = "audits";
@@ -33,12 +33,12 @@ public class Application {
 	 * @param applicationName
 	 * @throws IllegalArgumentException if applicationName is null or empty
 	 */
-	public Application(String applicationName) {
+	public ApplicationDecsriptor(String applicationName) {
 		if (applicationName == null) {
-			throw new IllegalArgumentException("Application - applicationName is null");
+			throw new IllegalArgumentException("ApplicationDecsriptor - applicationName is null");
 		}
 		if (applicationName.trim().isEmpty()) {
-			throw new IllegalArgumentException("Application - applicationName is empty");
+			throw new IllegalArgumentException("ApplicationDecsriptor - applicationName is empty");
 		}
 		this.applicationName = applicationName;
 	}

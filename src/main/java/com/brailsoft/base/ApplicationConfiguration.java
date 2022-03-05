@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  *
  */
 public class ApplicationConfiguration {
-	private static Application registeredApplication = null;
+	private static ApplicationDecsriptor registeredApplication = null;
 	private static Logger logger = null;
 	private static File rootDir = null;
 	private static int executorServiceThreads = 5;
@@ -19,15 +19,15 @@ public class ApplicationConfiguration {
 	/**
 	 * Register the application class for this app.
 	 * 
-	 * @param application
+	 * @param applicationDecsriptor
 	 * @param rootDirectory
 	 * @throws IllegalArgumentException if application is null, or rootDirectory is
 	 *                                  null or empty
 	 * @throws IllegalSTateException    if an application has already been
 	 *                                  registered
 	 */
-	public synchronized static void registerApplication(Application application, String rootDirectory) {
-		if (application == null) {
+	public synchronized static void registerApplication(ApplicationDecsriptor applicationDecsriptor, String rootDirectory) {
+		if (applicationDecsriptor == null) {
 			throw new IllegalArgumentException("ApplicationConfiguration - application is null");
 		}
 		if (rootDirectory == null) {
@@ -39,7 +39,7 @@ public class ApplicationConfiguration {
 		if (registeredApplication != null) {
 			throw new IllegalStateException("ApplicationConfiguration - registeredApplication is not null");
 		}
-		registeredApplication = application;
+		registeredApplication = applicationDecsriptor;
 		logger = Logger.getLogger(registeredApplication.loggerName());
 		rootDir = new File(rootDirectory);
 	}
@@ -50,7 +50,7 @@ public class ApplicationConfiguration {
 	 * @return application
 	 * @throws IllegalStateException if no application has been registered.
 	 */
-	public synchronized static Application application() {
+	public synchronized static ApplicationDecsriptor applicationDecsriptor() {
 		if (registeredApplication == null) {
 			throw new IllegalStateException("ApplicationConfiguration - registeredApplication is null");
 		}

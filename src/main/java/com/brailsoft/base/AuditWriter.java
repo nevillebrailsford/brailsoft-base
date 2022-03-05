@@ -5,18 +5,18 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 public class AuditWriter {
-	private Application application;
+	private ApplicationDecsriptor applicationDecsriptor;
 
 	/**
 	 * Create an audit writer
 	 * 
-	 * @throws IllegalStateException if application has not been registered.
+	 * @throws IllegalStateException if applicationDecsriptor has not been registered.
 	 */
 	public AuditWriter() {
-		if (ApplicationConfiguration.application() == null) {
-			throw new IllegalStateException("AuditWriter - application is null");
+		if (ApplicationConfiguration.applicationDecsriptor() == null) {
+			throw new IllegalStateException("AuditWriter - applicationDecsriptor is null");
 		}
-		application = ApplicationConfiguration.application();
+		applicationDecsriptor = ApplicationConfiguration.applicationDecsriptor();
 	}
 
 	/**
@@ -30,13 +30,13 @@ public class AuditWriter {
 		if (record == null) {
 			throw new IllegalArgumentException("AuditWriter - record is null");
 		}
-		File auditDirectory = new File(application.auditDirectory());
+		File auditDirectory = new File(applicationDecsriptor.auditDirectory());
 		if (!auditDirectory.exists()) {
 			if (!auditDirectory.mkdirs()) {
 				throw new IllegalStateException("AuditWriter - unable to create directory");
 			}
 		}
-		File auditFile = new File(application.auditFile());
+		File auditFile = new File(applicationDecsriptor.auditFile());
 		try (PrintStream writer = new PrintStream(new FileOutputStream(auditFile, true))) {
 			writer.println(record);
 		} catch (Exception e) {

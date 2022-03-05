@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 
 class ApplicationConfigurationTest {
 
-	private static Application test;
+	private static ApplicationDecsriptor test;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		test = new Application("test");
+		test = new ApplicationDecsriptor("test");
 	}
 
 	@AfterAll
@@ -40,7 +40,7 @@ class ApplicationConfigurationTest {
 	@Test
 	void testApplication() {
 		ApplicationConfiguration.registerApplication(test, "root");
-		assertEquals(test, ApplicationConfiguration.application());
+		assertEquals(test, ApplicationConfiguration.applicationDecsriptor());
 	}
 
 	@Test
@@ -95,7 +95,7 @@ class ApplicationConfigurationTest {
 	@Test
 	void testNeverRegistered() {
 		Exception exc = assertThrows(IllegalStateException.class, () -> {
-			ApplicationConfiguration.application();
+			ApplicationConfiguration.applicationDecsriptor();
 		});
 		assertEquals("ApplicationConfiguration - registeredApplication is null", exc.getMessage());
 	}

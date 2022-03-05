@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Configure the java logging infrastructure and ensure there is only a file
  * handler registered. Information specific to an application is passed into the
- * class by a Application instance. The onlt changes that can be made to the
+ * class by a ApplicationDecsriptor instance. The onlt changes that can be made to the
  * logging facility is to change the level of trace recording. It is important
  * that shutdown is called to ensure that all logging infotmation is written out
  * and files are closed.
@@ -37,11 +37,11 @@ public class LogConfigurer {
 		if (setup) {
 			throw new IllegalStateException("LogConfigurer - setup already called");
 		}
-		Application application = ApplicationConfiguration.application();
-		if (application == null) {
+		ApplicationDecsriptor applicationDecsriptor = ApplicationConfiguration.applicationDecsriptor();
+		if (applicationDecsriptor == null) {
 			throw new IllegalStateException("LogConfigurer - application is null");
 		}
-		LOGGER = Logger.getLogger(application.loggerName());
+		LOGGER = Logger.getLogger(applicationDecsriptor.loggerName());
 		Logger parent = LOGGER;
 		while (parent != null) {
 			for (Handler handler : parent.getHandlers()) {
@@ -52,13 +52,13 @@ public class LogConfigurer {
 			parent = parent.getParent();
 		}
 
-		File logDirectory = new File(application.loggerDirectory());
+		File logDirectory = new File(applicationDecsriptor.loggerDirectory());
 		if (!logDirectory.exists()) {
 			if (!logDirectory.mkdirs()) {
 				throw new IllegalStateException("LogConfigurer - could not create directory");
 			}
 		}
-		String logfileName = new File(application.loggerFile()).getAbsolutePath();
+		String logfileName = new File(applicationDecsriptor.loggerFile()).getAbsolutePath();
 		try {
 			fileHandler = new FileHandler(logfileName, 1000000000l, 1, false);
 			fileHandler.setFormatter(new LogFormatter());
@@ -71,7 +71,7 @@ public class LogConfigurer {
 			return;
 		}
 		setup = true;
-		changeLevel(application.level());
+		changeLevel(applicationDecsriptor.level());
 		LogRecord record = new LogRecord(Level.CONFIG, "setting configuration");
 		LOGGER.log(record);
 	}

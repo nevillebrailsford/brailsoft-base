@@ -9,34 +9,34 @@ import java.util.logging.Level;
 
 import org.junit.jupiter.api.Test;
 
-class ApplicationTest {
+class ApplicationDescriptorTest {
 
 	@Test
 	void testValidConstructor() {
-		new Application("valid");
+		new ApplicationDecsriptor("valid");
 	}
 
 	@Test
 	void testApplicationName() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		assertEquals("test", test.applicationName());
 	}
 
 	@Test
 	void testNodeName() {
-		Application test = new Application("node");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("node");
 		assertEquals("node", test.nodeName());
 	}
 
 	@Test
 	void testLoggerName() {
-		Application test = new Application("logger");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("logger");
 		assertEquals("logger", test.loggerName());
 	}
 
 	@Test
 	void testLoggerDirectory() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -47,7 +47,7 @@ class ApplicationTest {
 
 	@Test
 	void testLoggerFile() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -59,7 +59,7 @@ class ApplicationTest {
 
 	@Test
 	void testAuditDirectory() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -70,7 +70,7 @@ class ApplicationTest {
 
 	@Test
 	void testAuditFile() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -82,7 +82,7 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveDirectory() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -93,7 +93,7 @@ class ApplicationTest {
 
 	@Test
 	void testArchiveFile() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		ApplicationConfiguration.registerApplication(test, System.getProperty("user.home"));
 		File f = new File(System.getProperty("user.home"));
 		File f2 = new File(f, "test");
@@ -109,13 +109,13 @@ class ApplicationTest {
 
 	@Test
 	void testLevel() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		assertEquals(Level.ALL, test.level());
 	}
 
 	@Test
 	void testChangedLevel() {
-		Application test = new Application("test") {
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test") {
 			public Level level() {
 				return Level.OFF;
 			}
@@ -125,13 +125,13 @@ class ApplicationTest {
 
 	@Test
 	void testVersion() {
-		Application test = new Application("test");
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test");
 		assertEquals("1.0.0", test.version());
 	}
 
 	@Test
 	void testChangedVersion() {
-		Application test = new Application("test") {
+		ApplicationDecsriptor test = new ApplicationDecsriptor("test") {
 			public String version() {
 				return "2.0.1";
 			}
@@ -142,17 +142,17 @@ class ApplicationTest {
 	@Test
 	void testNullArgumentConstructor() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
-			new Application(null);
+			new ApplicationDecsriptor(null);
 		});
-		assertEquals("Application - applicationName is null", exc.getMessage());
+		assertEquals("ApplicationDecsriptor - applicationName is null", exc.getMessage());
 	}
 
 	@Test
 	void testEmptyArgumentConstructor() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
-			new Application("");
+			new ApplicationDecsriptor("");
 		});
-		assertEquals("Application - applicationName is empty", exc.getMessage());
+		assertEquals("ApplicationDecsriptor - applicationName is empty", exc.getMessage());
 	}
 
 }
