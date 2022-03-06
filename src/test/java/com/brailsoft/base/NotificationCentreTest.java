@@ -47,6 +47,7 @@ class NotificationCentreTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		NotificationCentre.clear();
+		NotificationCentre.stop();
 		notified = false;
 		notificationReceived = null;
 	}
