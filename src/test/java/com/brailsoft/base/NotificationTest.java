@@ -42,7 +42,7 @@ class NotificationTest {
 	@Test
 	void testToString() {
 		Notification not = new Notification(TestNotificationType.Test, this, "test");
-		assertEquals("TestNotificationType.Test NotificationTest test", not.toString());
+		assertEquals("TestNotificationType.Test testcategory NotificationTest test", not.toString());
 	}
 
 	@Test

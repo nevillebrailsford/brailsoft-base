@@ -50,7 +50,7 @@ class NotificationMonitorTest {
 			NotificationCentre.broadcast(new Notification(TestNotificationType.Test, this, "test"));
 			Thread.sleep(10);
 			String printText = outputStream.toString().trim();
-			assertEquals("TestNotificationType.Test NotificationMonitorTest test", printText);
+			assertEquals("TestNotificationType.Test testcategory NotificationMonitorTest test", printText);
 		}
 	}
 
@@ -62,7 +62,7 @@ class NotificationMonitorTest {
 			NotificationCentre.broadcast(new Notification(TestNotificationType.Test, this));
 			Thread.sleep(10);
 			String printText = outputStream.toString().trim();
-			assertEquals("TestNotificationType.Test NotificationMonitorTest null", printText);
+			assertEquals("TestNotificationType.Test testcategory NotificationMonitorTest null", printText);
 		}
 	}
 
