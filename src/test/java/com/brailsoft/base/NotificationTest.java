@@ -46,6 +46,12 @@ class NotificationTest {
 	}
 
 	@Test
+	void testCategory() {
+		Notification not = new Notification(TestNotificationType.Test, this, "test");
+		assertEquals("testcategory", not.notificationType().category());
+	}
+
+	@Test
 	void testCreationTooManySubject() {
 		Exception exc = assertThrows(IllegalArgumentException.class, () -> {
 			new Notification(TestNotificationType.Test, this, "one", "two");

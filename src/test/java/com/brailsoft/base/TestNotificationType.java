@@ -14,4 +14,9 @@ public enum TestNotificationType implements NotificationType {
 		return type;
 	}
 
+	@Override
+	public String category() {
+		return "testcategory";
+	}
+
 }
