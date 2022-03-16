@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 /**
  * Configure the java logging infrastructure and ensure there is only a file
  * handler registered. Information specific to an application is passed into the
- * class by a ApplicationDecsriptor instance. The onlt changes that can be made to the
- * logging facility is to change the level of trace recording. It is important
- * that shutdown is called to ensure that all logging infotmation is written out
- * and files are closed.
+ * class by a ApplicationDecsriptor instance. The onlt changes that can be made
+ * to the logging facility is to change the level of trace recording. It is
+ * important that shutdown is called to ensure that all logging infotmation is
+ * written out and files are closed.
  * 
  * @author nevil
  *
@@ -24,6 +24,7 @@ public class LogConfigurer {
 	private static Logger LOGGER = null;
 	private static FileHandler fileHandler;
 	private static boolean setup = false;
+	private static boolean duringSetup = true;
 
 	/**
 	 * Remove any existing handlers registered with the logging service and create
@@ -74,6 +75,7 @@ public class LogConfigurer {
 		changeLevel(applicationDecsriptor.level());
 		LogRecord record = new LogRecord(Level.CONFIG, "setting configuration");
 		LOGGER.log(record);
+		duringSetup = false;
 	}
 
 	/**
@@ -98,8 +100,10 @@ public class LogConfigurer {
 			parent.setLevel(level);
 			parent = parent.getParent();
 		}
-		LogRecord record = new LogRecord(Level.WARNING, "logging level has been set to " + level);
-		LOGGER.log(record);
+		if (!duringSetup) {
+			LogRecord record = new LogRecord(Level.WARNING, "logging level has been set to " + level);
+			LOGGER.log(record);
+		}
 	}
 
 	/**
