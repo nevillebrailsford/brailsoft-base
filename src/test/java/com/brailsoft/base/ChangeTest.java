@@ -50,7 +50,7 @@ class ChangeTest {
 
 	@Test
 	void testGetState() {
-		assertEquals(State.STUCK, stateErrorChange.getState());
+		assertEquals(State.STUCK, stateErrorChange.state());
 	}
 
 	@Test
@@ -77,25 +77,25 @@ class ChangeTest {
 	@Test
 	void testExecuteFailure() {
 		Change failureChange = new UTChange(State.READY, 1);
-		assertEquals(State.READY, failureChange.getState());
+		assertEquals(State.READY, failureChange.state());
 		failureChange.execute();
-		assertEquals(State.STUCK, failureChange.getState());
+		assertEquals(State.STUCK, failureChange.state());
 	}
 
 	@Test
 	void testUndoFailure() {
 		Change failureChange = new UTChange(State.DONE, 2);
-		assertEquals(State.DONE, failureChange.getState());
+		assertEquals(State.DONE, failureChange.state());
 		failureChange.undo();
-		assertEquals(State.STUCK, failureChange.getState());
+		assertEquals(State.STUCK, failureChange.state());
 	}
 
 	@Test
 	void testRedoFailure() {
 		Change failureChange = new UTChange(State.UNDONE, 3);
-		assertEquals(State.UNDONE, failureChange.getState());
+		assertEquals(State.UNDONE, failureChange.state());
 		failureChange.redo();
-		assertEquals(State.STUCK, failureChange.getState());
+		assertEquals(State.STUCK, failureChange.state());
 	}
 
 	private class UTChange extends AbstractChange {

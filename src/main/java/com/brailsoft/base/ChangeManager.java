@@ -18,7 +18,7 @@ public class ChangeManager {
 	private BooleanProperty undoable = new SimpleBooleanProperty(this, "undoable", false);
 	private BooleanProperty redoable = new SimpleBooleanProperty(this, "redoable", false);
 
-	public static synchronized ChangeManager getInstance() {
+	public static synchronized ChangeManager instance() {
 		if (instance == null) {
 			instance = new ChangeManager();
 			instance.setChangable();
@@ -46,7 +46,7 @@ public class ChangeManager {
 	public void execute(Change change) {
 		LOGGER.entering(CLASS_NAME, "execute", change);
 		change.execute();
-		if (change.getState() == Change.State.DONE) {
+		if (change.state() == Change.State.DONE) {
 			undoStack.push(change);
 			redoStack.clear();
 		} else {
@@ -62,7 +62,7 @@ public class ChangeManager {
 		if (undoStack.size() > 0) {
 			Change change = undoStack.pop();
 			change.undo();
-			if (change.getState() == Change.State.UNDONE) {
+			if (change.state() == Change.State.UNDONE) {
 				redoStack.push(change);
 			} else {
 				undoStack.clear();
@@ -78,7 +78,7 @@ public class ChangeManager {
 		if (redoStack.size() > 0) {
 			Change change = redoStack.pop();
 			change.redo();
-			if (change.getState() == Change.State.DONE) {
+			if (change.state() == Change.State.DONE) {
 				undoStack.push(change);
 			} else {
 				undoStack.clear();

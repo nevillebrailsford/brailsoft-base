@@ -36,124 +36,124 @@ class ChangeManagerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-		ChangeManager.getInstance().reset();
+		ChangeManager.instance().reset();
 		ApplicationConfiguration.clear();
 	}
 
 	@Test
 	void testGetInstance() {
-		assertNotNull(ChangeManager.getInstance());
+		assertNotNull(ChangeManager.instance());
 	}
 
 	@Test
 	void testExecute() {
-		assertEquals(Change.State.READY, change.getState());
+		assertEquals(Change.State.READY, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
 	}
 
 	@Test
 	void testUndo() {
-		assertEquals(Change.State.READY, change.getState());
+		assertEquals(Change.State.READY, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
 	}
 
 	@Test
 	void testRedo() {
-		assertEquals(Change.State.READY, change.getState());
+		assertEquals(Change.State.READY, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().redo();
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().redo();
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
 	}
 
 	@Test
 	void testMultiUndo() {
-		assertEquals(Change.State.READY, change.getState());
+		assertEquals(Change.State.READY, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
 	}
 
 	@Test
 	void testMultiRedo() {
-		assertEquals(Change.State.READY, change.getState());
+		assertEquals(Change.State.READY, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
 		assertEquals(1, ((UTChange) change).getCount());
-		ChangeManager.getInstance().redo();
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().redo();
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
-		ChangeManager.getInstance().redo();
-		assertEquals(Change.State.DONE, change.getState());
+		ChangeManager.instance().redo();
+		assertEquals(Change.State.DONE, change.state());
 		assertEquals(2, ((UTChange) change).getCount());
 	}
 
 	@Test
 	void testUndoable() {
-		assertFalse(ChangeManager.getInstance().undoableProperty().get());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
-		assertTrue(ChangeManager.getInstance().undoableProperty().get());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
-		assertFalse(ChangeManager.getInstance().undoableProperty().get());
+		assertFalse(ChangeManager.instance().undoableProperty().get());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
+		assertTrue(ChangeManager.instance().undoableProperty().get());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
+		assertFalse(ChangeManager.instance().undoableProperty().get());
 	}
 
 	@Test
 	void testRedoable() {
-		assertFalse(ChangeManager.getInstance().redoableProperty().get());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
-		assertFalse(ChangeManager.getInstance().redoableProperty().get());
-		ChangeManager.getInstance().undo();
-		assertEquals(Change.State.UNDONE, change.getState());
-		assertTrue(ChangeManager.getInstance().redoableProperty().get());
-		ChangeManager.getInstance().redo();
-		assertEquals(Change.State.DONE, change.getState());
-		assertFalse(ChangeManager.getInstance().redoableProperty().get());
+		assertFalse(ChangeManager.instance().redoableProperty().get());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
+		assertFalse(ChangeManager.instance().redoableProperty().get());
+		ChangeManager.instance().undo();
+		assertEquals(Change.State.UNDONE, change.state());
+		assertTrue(ChangeManager.instance().redoableProperty().get());
+		ChangeManager.instance().redo();
+		assertEquals(Change.State.DONE, change.state());
+		assertFalse(ChangeManager.instance().redoableProperty().get());
 	}
 
 	@Test
 	void testMultiUndoRedos() {
-		assertFalse(ChangeManager.getInstance().undoableProperty().get());
-		assertFalse(ChangeManager.getInstance().redoableProperty().get());
-		ChangeManager.getInstance().execute(change);
-		assertEquals(Change.State.DONE, change.getState());
-		assertTrue(ChangeManager.getInstance().undoableProperty().get());
-		assertFalse(ChangeManager.getInstance().redoableProperty().get());
+		assertFalse(ChangeManager.instance().undoableProperty().get());
+		assertFalse(ChangeManager.instance().redoableProperty().get());
+		ChangeManager.instance().execute(change);
+		assertEquals(Change.State.DONE, change.state());
+		assertTrue(ChangeManager.instance().undoableProperty().get());
+		assertFalse(ChangeManager.instance().redoableProperty().get());
 		for (int i = 0; i < 10; i++) {
-			ChangeManager.getInstance().undo();
-			assertFalse(ChangeManager.getInstance().undoableProperty().get());
-			assertTrue(ChangeManager.getInstance().redoableProperty().get());
-			ChangeManager.getInstance().redo();
-			assertTrue(ChangeManager.getInstance().undoableProperty().get());
-			assertFalse(ChangeManager.getInstance().redoableProperty().get());
+			ChangeManager.instance().undo();
+			assertFalse(ChangeManager.instance().undoableProperty().get());
+			assertTrue(ChangeManager.instance().redoableProperty().get());
+			ChangeManager.instance().redo();
+			assertTrue(ChangeManager.instance().undoableProperty().get());
+			assertFalse(ChangeManager.instance().redoableProperty().get());
 		}
 
 	}
@@ -162,16 +162,16 @@ class ChangeManagerTest {
 	void testUndoAndRedoMatch() {
 		for (int i = 0; i < 10; i++) {
 			CounterChange change = new CounterChange(count);
-			assertEquals(Change.State.READY, change.getState());
-			ChangeManager.getInstance().execute(change);
+			assertEquals(Change.State.READY, change.state());
+			ChangeManager.instance().execute(change);
 		}
 		assertEquals(10, count.getCount());
 		for (int i = 0; i < 10; i++) {
-			ChangeManager.getInstance().undo();
+			ChangeManager.instance().undo();
 		}
 		assertEquals(0, count.getCount());
 		for (int i = 0; i < 10; i++) {
-			ChangeManager.getInstance().redo();
+			ChangeManager.instance().redo();
 		}
 		assertEquals(10, count.getCount());
 	}

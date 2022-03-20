@@ -9,7 +9,7 @@ public abstract class AbstractChange implements Change {
 	State state = State.READY;
 
 	@Override
-	public State getState() {
+	public State state() {
 		LOGGER.entering(CLASS_NAME, "getState");
 		LOGGER.exiting(CLASS_NAME, "getState", state);
 		return state;

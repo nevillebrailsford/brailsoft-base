@@ -5,7 +5,7 @@ public interface Change {
 		READY, DONE, UNDONE, STUCK
 	};
 
-	State getState();
+	State state();
 
 	void execute();
 
