@@ -17,16 +17,9 @@ import java.util.logging.Level;
  *
  */
 public class ApplicationDecsriptor {
-	private static final String LOG_DIRECTORY_NAME = "logs";
-	private static final String LOG_FILE_SUFFIX = ".trace";
-	private static final String AUDIT_DIRECTORY_NAME = "audits";
-	private static final String AUDIT_FILE_SUFFIX = ".audit";
-	private static final String ARCHIVE_DIRECTORY_NAME = "archives";
-	private static final String ARCHIVE_FILE_SUFFIX = ".archive";
-	private static final String INIFILE_DIRECTORY_NAME = "inifiles";
-	private static final String INIFILE_SUFFIX = "ini";
+
 	private static final DateTimeFormatter formatter = DateTimeFormatter
-			.ofPattern(DateFormats.dateFormatForArchiveFileName);
+			.ofPattern(BaseConstants.dateFormatForArchiveFileName);
 	private String applicationName;
 
 	/**
@@ -116,43 +109,44 @@ public class ApplicationDecsriptor {
 	}
 
 	private final File loggerDirectoryFile() {
-		File logDirectory = new File(applicationWorkingDirectoryFile(), LOG_DIRECTORY_NAME);
+		File logDirectory = new File(applicationWorkingDirectoryFile(), BaseConstants.LOG_DIRECTORY_NAME);
 		return logDirectory;
 	}
 
 	private final File loggerFileFile() {
-		File logFile = new File(loggerDirectoryFile(), applicationName + LOG_FILE_SUFFIX);
+		File logFile = new File(loggerDirectoryFile(), applicationName + BaseConstants.LOG_FILE_SUFFIX);
 		return logFile;
 	}
 
 	private final File auditDirectoryFile() {
-		File auditDirectory = new File(applicationWorkingDirectoryFile(), AUDIT_DIRECTORY_NAME);
+		File auditDirectory = new File(applicationWorkingDirectoryFile(), BaseConstants.AUDIT_DIRECTORY_NAME);
 		return auditDirectory;
 	}
 
 	private final File auditFileFile() {
-		File auditFile = new File(auditDirectoryFile(), applicationName + AUDIT_FILE_SUFFIX);
+		File auditFile = new File(auditDirectoryFile(), applicationName + BaseConstants.AUDIT_FILE_SUFFIX);
 		return auditFile;
 	}
 
 	private final File archiveDirectoryFile() {
-		File archiveDirectory = new File(applicationWorkingDirectoryFile(), ARCHIVE_DIRECTORY_NAME);
+		File archiveDirectory = new File(applicationWorkingDirectoryFile(), BaseConstants.ARCHIVE_DIRECTORY_NAME);
 		return archiveDirectory;
 	}
 
 	private final File archiveFileFile() {
-		String archiveFileName = applicationName + ARCHIVE_FILE_SUFFIX + formatter.format(LocalDateTime.now());
+		String archiveFileName = applicationName + BaseConstants.ARCHIVE_FILE_SUFFIX
+				+ formatter.format(LocalDateTime.now());
 		File archiveFile = new File(archiveDirectoryFile(), archiveFileName);
 		return archiveFile;
 	}
 
 	private final File iniFileDirectoryFile() {
-		File iniFileDirectory = new File(applicationWorkingDirectoryFile(), INIFILE_DIRECTORY_NAME);
+		File iniFileDirectory = new File(applicationWorkingDirectoryFile(), BaseConstants.INIFILE_DIRECTORY_NAME);
 		return iniFileDirectory;
 	}
 
 	private final File iniFileFile() {
-		File iniFile = new File(iniFileDirectoryFile(), applicationName + INIFILE_SUFFIX);
+		File iniFile = new File(iniFileDirectoryFile(), applicationName + BaseConstants.INIFILE_SUFFIX);
 		return iniFile;
 	}
 

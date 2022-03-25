@@ -10,7 +10,8 @@ import java.util.logging.LogRecord;
 
 public class LogFormatter extends Formatter {
 
-	private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.dateFormatForLogRecord);
+	private final static DateTimeFormatter formatter = DateTimeFormatter
+			.ofPattern(BaseConstants.dateFormatForLogRecord);
 	private final static char lineEnd = 10;
 	private final static String ENTRY = ">";
 	private final static String EXIT = "<";

@@ -16,7 +16,7 @@ public class AuditRecord<T extends AuditType, O extends AuditObject> implements 
 	private O auditObject;
 	private String auditInformation;
 
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.dateFormatForAuditRecord);
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(BaseConstants.dateFormatForAuditRecord);
 	private String user;
 	private ZonedDateTime timeStamp;
 
